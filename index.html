@@ -228,8 +228,8 @@
             </div>
           </article>
 
-          <article class="card">
-            <div class="placeholder">Neue Pizza-Bilder folgen</div>
+          <article class="card service-card">
+            <img src="pizza_start.jpg" alt="Frische Pizza aus dem Holzofen">
             <div class="card-pad">
               <h3>Frische Pizza</h3>
               <p class="muted" style="margin-top:16px;">Saftiger Teig, beste Zutaten und perfekt gebacken im Holzofen.</p>
@@ -310,28 +310,46 @@
             </div>
 
             <article class="card card-pad">
-              <h3>Preis anfragen</h3>
-              <p class="muted" style="margin-top:16px;">Tragen Sie die wichtigsten Infos ein. Beim Klick auf den Button öffnet sich Ihre E-Mail-App mit einer vorbereiteten Anfrage an uns.</p>
+              <h3>Jetzt unverbindlich anfragen</h3>
+              <p class="muted" style="margin-top:16px;">Je genauer Ihre Angaben sind, desto schneller können wir Ihnen ein passendes Angebot schicken. Die Anfrage ist unverbindlich.</p>
+              <div class="tiles" style="margin-top:18px; margin-bottom:22px;">
+                <div class="tile">Schnelle Rückmeldung</div>
+                <div class="tile">Individuelles Angebot</div>
+                <div class="tile">Für privat und gewerblich</div>
+                <div class="tile">Flexible Speisenauswahl</div>
+              </div>
 
               <div class="field" style="margin-top:20px;">
+                <label for="anfrage-name">Name</label>
+                <input id="anfrage-name" type="text" placeholder="Ihr Name oder Firmenname">
+              </div>
+              <div class="field">
+                <label for="anfrage-art">Privat oder Gewerblich</label>
+                <select id="anfrage-art" style="width:100%; border-radius:16px; border:1px solid rgba(255,255,255,.10); background:#15110f; color:white; padding:14px 16px; outline:none;">
+                  <option value="">Bitte auswählen</option>
+                  <option value="Privat">Privat</option>
+                  <option value="Gewerblich">Gewerblich</option>
+                </select>
+              </div>
+              <div class="field">
                 <label for="anfrage-personen">Personenanzahl</label>
-                <input id="anfrage-personen" type="text">
+                <input id="anfrage-personen" type="text" placeholder="ungefähre Gästezahl">
               </div>
               <div class="field">
                 <label for="anfrage-ort">Veranstaltungsort</label>
-                <input id="anfrage-ort" type="text">
+                <input id="anfrage-ort" type="text" placeholder="Ort der Veranstaltung">
               </div>
               <div class="field">
                 <label for="anfrage-speisen">Gewünschte Speisen</label>
-                <input id="anfrage-speisen" type="text">
+                <input id="anfrage-speisen" type="text" placeholder="z. B. Dinnele, Pizza oder beides">
               </div>
               <div class="field">
-                <label for="anfrage-zweck">Zweck der Veranstaltung</label>
-                <textarea id="anfrage-zweck"></textarea>
+                <label for="anfrage-zweck">Veranstaltungsart</label>
+                <textarea id="anfrage-zweck" placeholder="z. B. Firmenfeier, Hochzeit, Festival, Geburtstag, Stadtfest"></textarea>
               </div>
 
               <div class="buttons">
-                <button class="btn btn-primary" id="mailto-btn">Anfrage per E-Mail senden</button>
+                <button class="btn btn-primary" id="mailto-btn">Jetzt Angebot anfragen</button>
               </div>
             </article>
           </div>
@@ -384,6 +402,22 @@
                   <h3 style="font-size:22px;">Kartoffel-Käse</h3>
                   <p class="muted" style="margin-top:14px;">Cremige, hauchdünne Kartoffelscheiben treffen auf zart schmelzenden Käse und unseren aromatischen Hefeteig. Ein echter Klassiker für Käse- und Kartoffelliebhaber.</p>
                 </article>
+            </div>
+          </div>
+
+          <div style="margin-top:42px;">
+            <h3 style="font-size:34px;">Süße Dinnele</h3>
+            <div class="grid-products" style="margin-top:22px;">
+              <article class="card card-pad product-box">
+                <div class="sortenbild">Platz für Sortenbild</div>
+                <h3 style="font-size:22px;">Apfel-Zimt</h3>
+                <p class="muted" style="margin-top:14px;">Fruchtige Äpfel kombiniert mit feinem Zimt auf knusprigem Teig. Warm serviert ein echter Klassiker.</p>
+              </article>
+              <article class="card card-pad product-box">
+                <div class="sortenbild">Platz für Sortenbild</div>
+                <h3 style="font-size:22px;">Erdbeere-Schoko</h3>
+                <p class="muted" style="margin-top:14px;">Süße Erdbeeren und geschmolzene Schokolade auf frisch gebackenem Dinnele.</p>
+              </article>
             </div>
           </div>
 
@@ -542,13 +576,15 @@
     if (document.getElementById(startPage)) showPage(startPage);
 
     document.getElementById('mailto-btn')?.addEventListener('click', () => {
+      const name = document.getElementById('anfrage-name')?.value || '';
+      const art = document.getElementById('anfrage-art')?.value || '';
       const persons = document.getElementById('anfrage-personen')?.value || '';
       const location = document.getElementById('anfrage-ort')?.value || '';
       const food = document.getElementById('anfrage-speisen')?.value || '';
       const purpose = document.getElementById('anfrage-zweck')?.value || '';
       const subject = encodeURIComponent('Preisanfrage Event Kitchen');
       const body = encodeURIComponent(
-        `Personenanzahl: ${persons}\nVeranstaltungsort: ${location}\nGewünschte Speisen: ${food}\nZweck der Veranstaltung: ${purpose}`
+        `Name: ${name}\nPrivat/Gewerblich: ${art}\nPersonenanzahl: ${persons}\nVeranstaltungsort: ${location}\nGewünschte Speisen: ${food}\nVeranstaltungsart: ${purpose}`
       );
       window.location.href = `mailto:info@eventkitchen.net?subject=${subject}&body=${body}`;
     });
