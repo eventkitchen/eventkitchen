@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Event Kitchen</title>
+  <meta name="description" content="Event Kitchen. Dinnele und Pizza frisch aus dem Holzofen für Events, Festivals und Märkte." />
+  <style>
+    :root {
+      --bg:#15120f;
+      --bg-2:#1d1713;
+      --bg-3:#241c16;
+      --card:#201814;
+      --line:rgba(255,255,255,.10);
+      --text:#f3f1ed;
+      --muted:#c1b8ae;
+      --soft:#8d7967;
+      --accent:#c9772b;
+      --accent-2:#e3ad67;
+      --shadow:0 18px 40px rgba(0,0,0,.28);
+      --radius:30px;
+      --max:1180px;
+    }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body {
+      margin:0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(180deg, #18130f 0%, #120f0d 100%);
+      color: var(--text);
+      line-height:1.55;
+    }
+    img { max-width:100%; display:block; }
+    a { color:inherit; text-decoration:none; }
+    button { font:inherit; cursor:pointer; }
+    .container { max-width:var(--max); margin:0 auto; padding:0 22px; }
+    .hidden { display:none !important; }
+    header {
+      position:sticky; top:0; z-index:50;
+      background:rgba(18,14,11,.94);
+      backdrop-filter: blur(10px);
+      border-bottom:1px solid var(--line);
+    }
+    .topbar {
+      display:flex; align-items:center; justify-content:space-between; gap:20px;
+      padding:18px 0;
+    }
+    .brand {
+      font-size:30px; font-weight:700; letter-spacing:-.04em; color:#f4e6d1;
+    }
+    nav {
+      display:flex; flex-wrap:wrap; gap:18px;
+      color:#d0c6bc; font-size:15px;
+    }
+    nav a { opacity:.88; }
+    nav a:hover { opacity:1; color:white; }
+    .page { min-height:calc(100vh - 120px); }
+    .hero {
+      border-bottom:1px solid var(--line);
+      background: linear-gradient(180deg, #1d1713 0%, #15120f 100%);
+    }
+    .hero-grid {
+      display:grid; grid-template-columns:1.03fr .97fr; gap:34px; align-items:center;
+      padding:54px 0 72px;
+    }
+    h1 {
+      margin:0;
+      font-size: clamp(44px, 7vw, 78px);
+      line-height:.96;
+      letter-spacing:-.06em;
+      color:#f4e6d1;
+    }
+    h2 {
+      margin:0;
+      font-size: clamp(28px, 4.2vw, 44px);
+      line-height:1.04;
+      letter-spacing:-.04em;
+      color:#f4e6d1;
+    }
+    h3 {
+      margin:0;
+      font-size:25px;
+      letter-spacing:-.03em;
+      color:#f4e6d1;
+    }
+    p { margin:0 0 14px; }
+    .lead { font-size:20px; color:var(--muted); line-height:1.75; }
+    .muted { color:var(--muted); }
+    .card {
+      background:linear-gradient(180deg, rgba(255,255,255,.02) 0%, rgba(255,255,255,.01) 100%);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      overflow:hidden;
+      box-shadow:var(--shadow);
+    }
+    .card-pad { padding:30px; }
+    .hero-media img { width:100%; height:470px; object-fit:cover; }
+    .buttons { display:flex; flex-wrap:wrap; gap:14px; margin-top:28px; }
+    .btn {
+      display:inline-flex; align-items:center; justify-content:center;
+      min-height:50px; padding:12px 20px; border-radius:18px; border:1px solid transparent;
+      font-weight:700;
+    }
+    .btn-primary { background:var(--accent); color:white; }
+    .btn-secondary { background:rgba(255,255,255,.05); border-color:var(--line); color:var(--text); }
+    .section { padding:70px 0; }
+    .grid-2 { display:grid; grid-template-columns:repeat(2,1fr); gap:24px; }
+    .grid-products { display:grid; grid-template-columns:repeat(2,1fr); gap:22px; }
+    .service-card img { width:100%; height:290px; object-fit:cover; }
+    .placeholder {
+      display:flex; align-items:center; justify-content:center; text-align:center;
+      min-height:290px; background:#171210; color:#7d7268;
+      border-bottom:1px solid var(--line);
+    }
+    .subtle {
+      color:#e5c089; font-size:13px; letter-spacing:.16em; text-transform:uppercase; font-weight:700;
+      margin-bottom:12px;
+    }
+    .split {
+      display:grid; grid-template-columns:1.05fr .95fr; gap:24px; align-items:start;
+    }
+    .tiles {
+      display:grid; grid-template-columns:repeat(2,1fr); gap:14px;
+    }
+    .tile {
+      border:1px solid var(--line); border-radius:18px; padding:16px;
+      background:rgba(255,255,255,.04); color:#ddd2c7;
+    }
+    .field { margin-bottom:16px; }
+    .field label {
+      display:block; font-size:14px; font-weight:700; color:#ddd2c7; margin-bottom:8px;
+    }
+    .field input, .field textarea {
+      width:100%; border-radius:16px; border:1px solid var(--line);
+      background:#15110f; color:white; padding:14px 16px; outline:none;
+    }
+    .field textarea { min-height:130px; resize:vertical; }
+    .product-box {
+      min-height:220px;
+    }
+    .sortenbild {
+      display:flex; align-items:center; justify-content:center; text-align:center;
+      height:200px; border:1px dashed var(--line); border-radius:18px; color:#7d7268;
+      background:#171210; margin-bottom:18px;
+    }
+    .gallery-grid {
+      display:grid; grid-template-columns:repeat(3,1fr); gap:18px;
+    }
+    .gallery-grid img {
+      width:100%; height:290px; object-fit:cover;
+    }
+    .contact-grid {
+      display:grid; grid-template-columns:1fr .88fr; gap:24px; align-items:start;
+    }
+    .contact-media img {
+      width:100%; max-width:430px; height:auto; object-fit:cover; margin:0 auto;
+    }
+    .contact-block {
+      margin-bottom:20px;
+    }
+    .contact-label {
+      margin-bottom:6px; font-size:13px; letter-spacing:.16em; text-transform:uppercase;
+      color:#8e8173; font-weight:700;
+    }
+    .legal p { margin-bottom:14px; color:#d0c6bc; }
+    footer {
+      border-top:1px solid var(--line);
+      background:#120e0b;
+      color:#8e8173;
+      padding:24px 0 32px;
+      font-size:14px;
+    }
+    @media (max-width: 980px) {
+      .hero-grid, .grid-2, .split, .grid-products, .gallery-grid, .contact-grid {
+        grid-template-columns:1fr;
+      }
+      .hero-media img { height:360px; }
+      nav { display:none; }
+      .section { padding:52px 0; }
+    }
+  
+    .product-img{
+      width:100%;
+      aspect-ratio:4/3;
+      object-fit:cover;
+      border-radius:18px;
+      display:block;
+      margin-bottom:18px;
+      border:1px solid rgba(255,255,255,.10);
+      box-shadow:0 14px 35px rgba(0,0,0,.28);
+      background:#17110d;
+    }
+
+
+    /* Smartphone Optimierung */
+    @media (max-width: 760px) {
+      html {
+        scroll-padding-top: 86px;
+      }
+
+      body {
+        font-size: 16px;
+        overflow-x: hidden;
+      }
+
+      .nav,
+      header,
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 99;
+        backdrop-filter: blur(18px);
+      }
+
+      .container,
+      .wrap,
+      main,
+      section {
+        width: 100%;
+        max-width: 100%;
+      }
+
+      section {
+        padding: 54px 18px !important;
+      }
+
+      .hero,
+      .hero-section {
+        min-height: auto !important;
+        padding: 88px 18px 54px !important;
+      }
+
+      .hero h1,
+      h1 {
+        font-size: clamp(38px, 12vw, 58px) !important;
+        line-height: .96 !important;
+        letter-spacing: -1.5px !important;
+      }
+
+      h2 {
+        font-size: clamp(30px, 9vw, 42px) !important;
+        line-height: 1.04 !important;
+      }
+
+      h3 {
+        font-size: 23px !important;
+        line-height: 1.14 !important;
+      }
+
+      p,
+      .muted,
+      li {
+        font-size: 16px !important;
+        line-height: 1.58 !important;
+      }
+
+      .grid,
+      .two-col,
+      .split,
+      .content-grid,
+      .grid-products,
+      .gallery-grid,
+      .contact-grid,
+      .footer-grid,
+      .cards,
+      .tiles {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 18px !important;
+      }
+
+      .card,
+      .card-pad,
+      .product-box {
+        border-radius: 22px !important;
+      }
+
+      .card-pad,
+      .product-box {
+        padding: 22px !important;
+      }
+
+      .hero img,
+      .service-card img,
+      .gallery-grid img,
+      .product-img,
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+
+      .product-img,
+      .service-card img {
+        aspect-ratio: 4 / 3 !important;
+        object-fit: cover !important;
+        border-radius: 18px !important;
+      }
+
+      .gallery-grid img,
+      .gallery img {
+        aspect-ratio: 4 / 3 !important;
+        object-fit: cover !important;
+        border-radius: 18px !important;
+      }
+
+      .btn,
+      button,
+      input,
+      textarea,
+      select {
+        width: 100% !important;
+        max-width: 100% !important;
+        font-size: 16px !important;
+      }
+
+      .btn,
+      button {
+        justify-content: center !important;
+        text-align: center !important;
+        padding: 15px 18px !important;
+      }
+
+      input,
+      textarea,
+      select {
+        min-height: 50px !important;
+      }
+
+      textarea {
+        min-height: 120px !important;
+      }
+
+      nav,
+      .nav-links,
+      .menu {
+        gap: 10px !important;
+        overflow-x: auto !important;
+        white-space: nowrap !important;
+        padding-bottom: 8px !important;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      nav a,
+      .nav-links a,
+      .menu a {
+        font-size: 14px !important;
+        padding: 9px 12px !important;
+      }
+
+      .logo,
+      .brand {
+        font-size: 20px !important;
+        white-space: nowrap !important;
+      }
+
+      .hide-mobile {
+        display: none !important;
+      }
+
+      .desktop-only {
+        display: none !important;
+      }
+
+      .mobile-tight {
+        margin-top: 14px !important;
+      }
+
+      .hero .card,
+      .hero-card {
+        margin-top: 24px !important;
+      }
+
+      .legal,
+      .impressum,
+      .datenschutz {
+        word-break: break-word;
+      }
+    }
+
+    @media (max-width: 430px) {
+      section {
+        padding-left: 14px !important;
+        padding-right: 14px !important;
+      }
+
+      .card-pad,
+      .product-box {
+        padding: 18px !important;
+      }
+
+      .hero h1,
+      h1 {
+        font-size: 42px !important;
+      }
+
+      h2 {
+        font-size: 32px !important;
+      }
+    }
+
+
+    /* Smartphone Menü */
+    .mobile-menu-toggle {
+      display: none;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.08);
+      color: #fff;
+      border-radius: 14px;
+      padding: 10px 13px;
+      font-size: 15px;
+      cursor: pointer;
+      width: auto !important;
+    }
+
+    @media (max-width: 760px) {
+      header .container,
+      .nav,
+      .site-header .container {
+        position: relative;
+      }
+
+      .mobile-menu-toggle {
+        display: inline-flex !important;
+        align-items: center;
+        justify-content: center;
+        margin-left: auto;
+      }
+
+      .nav-links,
+      nav ul,
+      .menu {
+        display: none !important;
+      }
+
+      body.mobile-menu-open .nav-links,
+      body.mobile-menu-open nav ul,
+      body.mobile-menu-open .menu {
+        display: grid !important;
+        position: absolute;
+        left: 14px;
+        right: 14px;
+        top: calc(100% + 10px);
+        grid-template-columns: 1fr !important;
+        gap: 8px !important;
+        padding: 14px !important;
+        border-radius: 22px !important;
+        background: rgba(18, 13, 10, .98) !important;
+        border: 1px solid rgba(255,255,255,.12);
+        box-shadow: 0 18px 50px rgba(0,0,0,.42);
+        overflow: visible !important;
+        white-space: normal !important;
+      }
+
+      body.mobile-menu-open .nav-links a,
+      body.mobile-menu-open nav ul a,
+      body.mobile-menu-open .menu a {
+        display: block !important;
+        width: 100% !important;
+        padding: 13px 14px !important;
+        border-radius: 14px !important;
+        background: rgba(255,255,255,.06);
+        font-size: 16px !important;
+      }
+    }
+
+</style>
+</head>
+<body>
+  <header>
+    <div class="container topbar">
+      <a href="#" class="brand" data-page="startseite">Event Kitchen</a>
+      <nav>
+        <a href="#" data-page="startseite">Startseite</a>
+        <a href="#" data-page="ueber-uns">Über uns</a>
+        <a href="#" data-page="services">Services</a>
+        <a href="#" data-page="produkte">Produkte</a>
+        <a href="#" data-page="galerie">Galerie</a>
+        <a href="#" data-page="kontakt">Kontakt</a>
+        <a href="#" data-page="impressum">Impressum</a>
+        <a href="#" data-page="datenschutz">Datenschutzerklärung</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section id="startseite" class="page">
+      <div class="hero">
+        <div class="container hero-grid">
+          <div>
+            <h1>Genuss aus dem Holzofen</h1>
+            <p class="lead" style="margin-top:24px;">Mit unserem Food-Stand „Event Kitchen“ möchten wir Ihr Event mit köstlichem Essen und guter Stimmung bereichern. Wir bieten je nach Bedarf frisch zubereitete Dinnele oder Pizza, gebacken in unserem traditionell mit Holz befeuerten Ofen. Unser Ziel ist es, Ihren Gästen nicht nur ein besonderes Geschmackserlebnis zu bieten, sondern auch für eine großartige Atmosphäre zu sorgen.</p>
+            <div class="buttons">
+              <a class="btn btn-primary" href="#" data-page="kontakt">Jetzt buchen</a>
+              <a class="btn btn-secondary" href="#" data-page="galerie">Galerie ansehen</a>
+            </div>
+          </div>
+          <div class="card hero-media">
+            <img src="hero.jpg" alt="Event Kitchen Stand bei Nacht">
+          </div>
+        </div>
+      </div>
+
+      <div class="section" style="background:#120f0d;">
+        <div class="container grid-2">
+          <article class="card service-card">
+            <img src="dinnele_card.jpg" alt="Köstliche Dinnele">
+            <div class="card-pad">
+              <h3>Köstliche Dinnele</h3>
+              <p class="muted" style="margin-top:16px;">Genießen Sie die traditionelle Spezialität aus Baden. Frisch aus unserem Holzofen.</p>
+              <div class="buttons" style="margin-top:18px;">
+                <a href="#" data-page="produkte" style="color:#e5c089; font-weight:700; text-decoration:underline; text-underline-offset:4px;">Variationen</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="card service-card">
+            <img src="pizza_start.jpg" alt="Frische Pizza aus dem Holzofen">
+            <div class="card-pad">
+              <h3>Frische Pizza</h3>
+              <p class="muted" style="margin-top:16px;">Saftiger Teig, beste Zutaten und perfekt gebacken im Holzofen.</p>
+              <div class="buttons" style="margin-top:18px;">
+                <a href="#" data-page="produkte" style="color:#e5c089; font-weight:700; text-decoration:underline; text-underline-offset:4px;">Variationen</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="ueber-uns" class="page hidden">
+      <div class="section">
+        <div class="container">
+          <div class="subtle">Über uns</div>
+          <h2>Über Event Kitchen</h2>
+
+          <div class="split" style="margin-top:28px;">
+            <article class="card card-pad">
+              <h3>Über uns</h3>
+              <p class="muted" style="margin-top:16px;">Wir sind Mathis Frank und Florian Lamerdin. Mit unserer Erfahrung in der Gastronomie und der Arbeit mit Food-Ständen bringen wir das nötige Know-how mit, um eine professionelle Zusammenarbeit und zufriedene Kunden zu gewährleisten. Unsere Leidenschaft gilt der frischen Zubereitung von Speisen, die Menschen begeistern.</p>
+              <div class="buttons">
+                <a class="btn btn-primary" href="#" data-page="kontakt">Kontaktieren Sie uns</a>
+              </div>
+            </article>
+
+            <article class="card">
+              <div class="placeholder" style="min-height:280px;">Platz für ein neues Bild</div>
+            </article>
+          </div>
+
+          <div class="grid-2" style="margin-top:24px;">
+            <article class="card card-pad">
+              <h3>Unsere Philosophie</h3>
+              <p class="muted" style="margin-top:16px;">Bei Event Kitchen sind wir der Überzeugung, dass Essen nicht nur den Körper nährt, sondern auch Gelegenheiten schafft, zusammenzukommen und unvergessliche Erinnerungen zu schaffen. Unsere Liebe zu traditioneller Holzofen-Küche spiegelt sich in jedem Biss wider.</p>
+            </article>
+
+            <article class="card card-pad">
+              <h3>Unser Konzept</h3>
+              <p class="muted" style="margin-top:16px;">Unser Stand ist nicht nur ein kulinarisches Highlight, sondern auch optisch ein Hingucker. Das Design passen wir je nach Event an, bleiben aber immer einladend und auffällig. Wir sind ein junges, motiviertes und professionelles Team, das Besucher aktiv anspricht, eine angenehme Atmosphäre schafft und durch offene, frische Zubereitung für echte Wirkung sorgt.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="page hidden">
+      <div class="section">
+        <div class="container">
+          <article class="card card-pad" style="margin-bottom:24px; background:linear-gradient(180deg,#2a1d15 0%, #211914 100%);">
+            <h3>Festliche Stimmung</h3>
+            <p class="muted" style="margin-top:16px;">Wir sorgen für gute Stimmung und ein unvergessliches Erlebnis. Unser Stand fällt auf, bringt Atmosphäre auf das Eventgelände und verbindet frische Zubereitung mit einem starken Auftritt.</p>
+          </article>
+
+          <div class="split">
+            <div>
+              <article class="card card-pad" style="margin-bottom:24px;">
+                <h3>Unvergessliche Erlebnisse mit Event Kitchen</h3>
+                <p class="muted" style="margin-top:16px;">Bei Event Kitchen verbinden wir traditionelles Handwerk mit einem durchdachten Konzept, das jede Veranstaltung zu einem besonderen Erlebnis macht. Unser separater Holzofen sorgt auf großen Events wie Festivals oder Weihnachtsmärkten für einen reibungslosen Ablauf. Wir backen in Blechportionen, sodass immer frische Portionen bereitstehen.</p>
+                <p class="muted">Unser Stand ist mehr als nur ein Verkaufsstand. Er ist eine einladende Hütte, die von einem eigenen Holzofen begleitet wird. Der modulare Aufbau ermöglicht es uns, uns flexibel an jeden Standort anzupassen.</p>
+              </article>
+
+              <article class="card card-pad">
+                <h3>Für welche Events?</h3>
+                <div class="tiles" style="margin-top:18px;">
+                  <div class="tile">Festivals</div>
+                  <div class="tile">Weihnachtsmärkte</div>
+                  <div class="tile">Stadtfeste</div>
+                  <div class="tile">Firmenveranstaltungen</div>
+                  <div class="tile">Private Feiern</div>
+                  <div class="tile">Sonderveranstaltungen</div>
+                </div>
+                <div class="buttons">
+                  <a class="btn btn-secondary" href="#" data-page="kontakt">Direkt Kontakt aufnehmen</a>
+                </div>
+              </article>
+            </div>
+
+            <article class="card card-pad">
+              <h3>Jetzt unverbindlich anfragen</h3>
+              <p class="muted" style="margin-top:16px;">Je genauer Ihre Angaben sind, desto schneller können wir Ihnen ein passendes Angebot schicken. Die Anfrage ist unverbindlich.</p>
+              <div class="tiles" style="margin-top:18px; margin-bottom:22px;">
+                <div class="tile">Schnelle Rückmeldung</div>
+                <div class="tile">Individuelles Angebot</div>
+                <div class="tile">Für privat und gewerblich</div>
+                <div class="tile">Flexible Speisenauswahl</div>
+              </div>
+
+              <div class="field" style="margin-top:20px;">
+                <label for="anfrage-name">Name</label>
+                <input id="anfrage-name" type="text" placeholder="Ihr Name oder Firmenname">
+              </div>
+              <div class="field">
+                <label for="anfrage-art">Privat oder Gewerblich</label>
+                <select id="anfrage-art" style="width:100%; border-radius:16px; border:1px solid rgba(255,255,255,.10); background:#15110f; color:white; padding:14px 16px; outline:none;">
+                  <option value="">Bitte auswählen</option>
+                  <option value="Privat">Privat</option>
+                  <option value="Gewerblich">Gewerblich</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="anfrage-personen">Personenanzahl</label>
+                <input id="anfrage-personen" type="text" placeholder="ungefähre Gästezahl">
+              </div>
+              <div class="field">
+                <label for="anfrage-ort">Veranstaltungsort</label>
+                <input id="anfrage-ort" type="text" placeholder="Ort der Veranstaltung">
+              </div>
+              <div class="field">
+                <label for="anfrage-speisen">Gewünschte Speisen</label>
+                <input id="anfrage-speisen" type="text" placeholder="z. B. Dinnele, Pizza oder beides">
+              </div>
+              <div class="field">
+                <label for="anfrage-zweck">Veranstaltungsart</label>
+                <textarea id="anfrage-zweck" placeholder="z. B. Firmenfeier, Hochzeit, Festival, Geburtstag, Stadtfest"></textarea>
+              </div>
+
+              <div class="buttons">
+                <button class="btn btn-primary" id="mailto-btn">Jetzt Angebot anfragen</button>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="produkte" class="page hidden">
+      <div class="section">
+        <div class="container">
+          <div class="subtle">Produkte</div>
+          <h2>Unsere Spezialitäten im Überblick</h2>
+
+          <div class="grid-2" style="margin-top:28px;">
+            <article class="card card-pad" style="background:#241a14;">
+              <h3>Höchste Qualität garantiert</h3>
+              <p class="muted" style="margin-top:16px;">Wir von Event Kitchen garantieren höchste Qualität in jedem Bissen. Unser Team sorgt dafür, dass jede Dinnele nach unseren hohen Standards hergestellt wird, damit Sie stets das Beste genießen können.</p>
+            </article>
+            <article class="card card-pad" style="background:#241a14;">
+              <h3>Frische Zubereitung vor Ort</h3>
+              <p class="muted" style="margin-top:16px;">Jede Dinnele wird in unserer Küche vor Ort frisch zubereitet. Wir legen großen Wert auf frische Zutaten und die sorgfältige Zubereitung, um Ihnen das beste Geschmackserlebnis zu bieten.</p>
+            </article>
+          </div>
+
+          <div style="margin-top:42px;">
+            <h3 style="font-size:34px;">Dinnele</h3>
+            <div class="grid-products" style="margin-top:22px;">
+              <article class="card card-pad product-box">
+                  <img class="product-img" src="gemuese-vegan.png" alt="Dinnele Gemüse-Vegan">
+                  <h3 style="font-size:22px;">Zwiebel-Speck Dinnele</h3>
+                  <p class="muted" style="margin-top:14px;">Unsere Zwiebel-Speck Dinnele kombiniert zarte Zwiebeln mit knusprigem Speck, perfekt abgerundet mit einem herzhaften Teig. Diese zeitlose Variante ist ein echter Genuss für alle Liebhaber deftiger Speisen.</p>
+                </article><article class="card card-pad product-box">
+                  <img class="product-img" src="kartoffel-speck.png" alt="Dinnele Kartoffel-Speck">
+                  <h3 style="font-size:22px;">Gemüse-Käse</h3>
+                  <p class="muted" style="margin-top:14px;">Buntes, frisches Gemüse wie Karotten, Zucchini und Zwiebeln vereint sich mit geschmolzenem Käse zu einer wunderbar würzigen Kreation. Diese Dinnele-Variante bietet eine köstliche Mischung aus knackiger Frische und cremigem Käsegenuss.</p>
+                </article><article class="card card-pad product-box">
+                  <img class="product-img" src="kartoffel-kaese.png" alt="Dinnele Kartoffel-Käse">
+                  <h3 style="font-size:22px;">Zwiebel-Käse</h3>
+                  <p class="muted" style="margin-top:14px;">Unsere Zwiebel-Käse-Dinnele vereint die feine Süße goldbraun gebackener Zwiebeln mit herzhaft geschmolzenem Käse auf unserem würzigen Hefeteig.</p>
+                </article><article class="card card-pad product-box">
+                  <img class="product-img" src="kartoffel-speck.png" alt="Dinnele Kartoffel-Speck">
+                  <h3 style="font-size:22px;">Gemüse-Vegan Dinnele</h3>
+                  <p class="muted" style="margin-top:14px;">Für die veganen Feinschmecker bieten wir unsere Gemüse-Vegan Dinnele an. Eine bunte Mischung aus frischem Gemüse wie knackigen Karotten, zarten Zucchini und aromatischen Zwiebeln.</p>
+                </article><article class="card card-pad product-box">
+                  <img class="product-img" src="kartoffel-kaese.png" alt="Dinnele Kartoffel-Käse">
+                  <h3 style="font-size:22px;">Kartoffel-Speck</h3>
+                  <p class="muted" style="margin-top:14px;">Knuspriger Speck und feine Kartoffelscheiben machen dieses Dinnele zu einer herzhaften Spezialität. Die perfekte Balance aus deftigem Geschmack und zartem Teig sorgt für ein unvergleichliches Geschmackserlebnis.</p>
+                </article><article class="card card-pad product-box">
+                  <img class="product-img" src="pizza-margherita.png" alt="Pizza Margherita">
+                  <h3 style="font-size:22px;">Kartoffel-Käse</h3>
+                  <p class="muted" style="margin-top:14px;">Cremige, hauchdünne Kartoffelscheiben treffen auf zart schmelzenden Käse und unseren aromatischen Hefeteig. Ein echter Klassiker für Käse- und Kartoffelliebhaber.</p>
+                </article>
+            </div>
+          </div>
+
+          <div style="margin-top:42px;">
+            <h3 style="font-size:34px;">Süße Dinnele</h3>
+            <div class="grid-products" style="margin-top:22px;">
+              <article class="card card-pad product-box">
+                <img class="product-img" src="pizza-funghi.png" alt="Pizza Funghi">
+                <h3 style="font-size:22px;">Apfel-Zimt</h3>
+                <p class="muted" style="margin-top:14px;">Fruchtige Äpfel kombiniert mit feinem Zimt auf knusprigem Teig. Warm serviert ein echter Klassiker.</p>
+              </article>
+              <article class="card card-pad product-box">
+                <img class="product-img" src="pizza-salami.png" alt="Pizza Salami">
+                <h3 style="font-size:22px;">Erdbeere-Schoko</h3>
+                <p class="muted" style="margin-top:14px;">Süße Erdbeeren und geschmolzene Schokolade auf frisch gebackenem Dinnele.</p>
+              </article>
+            </div>
+          </div>
+
+          <div style="margin-top:42px;">
+            <h3 style="font-size:34px;">Pizza</h3>
+            <div class="grid-products" style="margin-top:22px;">
+              <article class="card card-pad product-box">
+                  <img class="product-img" src="pizza-prosciutto-funghi.png" alt="Pizza Prosciutto-Funghi">
+                  <h3 style="font-size:22px;">Klassische Margherita</h3>
+                  <p class="muted" style="margin-top:14px;">Der italienische Klassiker in seiner reinsten Form. Ein luftig-knuspriger Teig, bestrichen mit fruchtiger Tomatensauce, belegt mit zart schmelzendem Mozzarella und verfeinert mit frischem Basilikum.</p>
+                </article><article class="card card-pad product-box">
+                  <img class="product-img" src="pizza-marinara.png" alt="Pizza Marinara">
+                  <h3 style="font-size:22px;">Funghi</h3>
+                  <p class="muted" style="margin-top:14px;">Aromatische Champignons auf einer herzhaften Tomatensauce, kombiniert mit cremigem Mozzarella, sorgen für ein wunderbar ausgewogenes Geschmackserlebnis.</p>
+                </article><article class="card card-pad product-box">
+                  <div class="sortenbild">Platz für Sortenbild</div>
+                  <h3 style="font-size:22px;">Vegane Marinara</h3>
+                  <p class="muted" style="margin-top:14px;">Unsere vegane Marinara bietet Ihnen ein unvergleichliches Geschmackserlebnis mit knusprigem Teig, erstklassiger Tomatensoße und frischem Knoblauch.</p>
+                </article><article class="card card-pad product-box">
+                  <div class="sortenbild">Platz für Sortenbild</div>
+                  <h3 style="font-size:22px;">Salami</h3>
+                  <p class="muted" style="margin-top:14px;">Würzige Salami, geschmolzener Mozzarella und eine fruchtige Tomatensauce. Eine unschlagbare Kombination für alle Liebhaber kräftiger Aromen.</p>
+                </article>
+              <article class="card card-pad product-box">
+                <img class="product-img" src="pizza-diavolo.png" alt="Pizza Diavolo">
+                <h3 style="font-size:22px;">Diavolo</h3>
+                <p class="muted" style="margin-top:14px;">Mit Tomatensoße, Käse, Salami und scharfer Peperoni.</p>
+              </article><article class="card card-pad product-box">
+                  <div class="sortenbild">Platz für Sortenbild</div>
+                  <h3 style="font-size:22px;">Prosciutto</h3>
+                  <p class="muted" style="margin-top:14px;">Saftiger, herzhafter Schinken auf einer aromatischen Tomatensauce, getoppt mit cremigem Mozzarella. Diese Pizza überzeugt mit ihrem perfekten Zusammenspiel aus deftigem Geschmack und feiner Würze.</p>
+                </article><article class="card card-pad product-box">
+                  <div class="sortenbild">Platz für Sortenbild</div>
+                  <h3 style="font-size:22px;">Prosciutto-Funghi</h3>
+                  <p class="muted" style="margin-top:14px;">Feine Champignons und herzhafter Schinken treffen auf eine fruchtige Tomatensauce und zart schmelzenden Mozzarella.</p>
+                </article>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="galerie" class="page hidden">
+      <div class="section">
+        <div class="container">
+          <div class="subtle">Galerie</div>
+          <h2>Einblicke in unseren Auftritt</h2>
+          <div class="gallery-grid" style="margin-top:28px;">
+            <div class="card"><img src="galerie_01.jpg" alt="Galeriebild"></div><div class="card"><img src="galerie_02.jpg" alt="Galeriebild"></div><div class="card"><img src="galerie_03.jpg" alt="Galeriebild"></div><div class="card"><img src="galerie_04.jpg" alt="Galeriebild"></div><div class="card"><img src="galerie_05.jpg" alt="Galeriebild"></div><div class="card"><img src="galerie_06.jpg" alt="Galeriebild"></div><div class="card"><img src="galerie_07.jpg" alt="Galeriebild"></div><div class="card"><img src="galerie_08.jpg" alt="Galeriebild"></div><div class="card"><img src="galerie_09.jpg" alt="Galeriebild"></div><div class="card"><img src="galerie_10.jpg" alt="Galeriebild"></div><div class="card"><img src="galerie_11.jpg" alt="Galeriebild"></div><div class="card"><img src="galerie_12.jpg" alt="Galeriebild"></div><div class="card"><img src="galerie_13.jpg" alt="Galeriebild"></div><div class="card"><img src="galerie_14.jpg" alt="Galeriebild"></div><div class="card"><img src="galerie_15.jpg" alt="Galeriebild"></div><div class="card"><img src="galerie_16.jpg" alt="Galeriebild"></div><div class="card"><img src="galerie_17.jpg" alt="Galeriebild"></div><div class="card"><img src="galerie_18.jpg" alt="Galeriebild"></div><div class="card"><img src="galerie_19.jpg" alt="Galeriebild"></div><div class="card"><img src="galerie_20.jpg" alt="Galeriebild"></div><div class="card"><img src="galerie_21.jpg" alt="Galeriebild"></div><div class="card"><img src="galerie_22.jpg" alt="Galeriebild"></div><div class="card"><img src="galerie_23.jpg" alt="Galeriebild"></div><div class="card"><img src="galerie_24.jpg" alt="Galeriebild"></div><div class="card"><img src="galerie_25.jpg" alt="Galeriebild"></div><div class="card"><img src="galerie_26.jpg" alt="Galeriebild"></div><div class="card"><img src="galerie_27.jpg" alt="Galeriebild"></div><div class="card"><img src="galerie_28.jpg" alt="Galeriebild"></div><div class="card"><img src="galerie_29.jpg" alt="Galeriebild"></div><div class="card"><img src="galerie_30.jpg" alt="Galeriebild"></div><div class="card"><img src="galerie_31.jpg" alt="Galeriebild"></div><div class="card"><img src="galerie_32.jpg" alt="Galeriebild"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="kontakt" class="page hidden">
+      <div class="section">
+        <div class="container">
+          <div class="subtle">Kontakt</div>
+          <h2>Direkter Kontakt</h2>
+
+          <div class="contact-grid" style="margin-top:28px;">
+            <article class="card card-pad">
+              <p class="muted" style="font-size:18px;">Schreiben Sie uns direkt oder rufen Sie uns an. Wir melden uns schnell zurück und klären alles Weitere unkompliziert.</p>
+
+              <div style="margin-top:28px;">
+                <div class="contact-block">
+                  <div class="contact-label">E-Mail</div>
+                  <div>info@eventkitchen.net</div>
+                </div>
+
+                <div class="contact-block">
+                  <div class="contact-label">Mathis Frank</div>
+                  <div>Telefon: +49 163 4705637</div>
+                </div>
+
+                <div class="contact-block">
+                  <div class="contact-label">Florian Lamerdin</div>
+                  <div>Telefon: +49 151 46330766</div>
+                </div>
+
+                <div class="contact-block">
+                  <div class="contact-label">Adresse</div>
+                  <div>Herrengasse 16<br>88634 Herdwangen-Schönach</div>
+                </div>
+              </div>
+
+              <div class="buttons">
+                <a class="btn btn-primary" href="mailto:info@eventkitchen.net">E-Mail schreiben</a>
+                <a class="btn btn-secondary" href="https://wa.me/491634705637">WhatsApp Mathis</a>
+              </div>
+            </article>
+
+            <article class="card contact-media">
+              <img src="kontakt.jpg" alt="Event Kitchen Kontaktbild">
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="impressum" class="page hidden">
+      <div class="section">
+        <div class="container">
+          <div class="subtle">Impressum</div>
+          <h2>Impressum</h2>
+          <article class="card card-pad legal" style="margin-top:28px;">
+            <p><strong>Name des Unternehmens</strong><br>Frank & Lamerdin Event Kitchen GbR</p>
+            <p><strong>Markenname</strong><br>Event Kitchen</p>
+            <p><strong>Gesellschafter und vertretungsberechtigte Personen</strong><br>Mathis Frank<br>Telefon: +49 163 4705637<br><br>Florian Lamerdin<br>Telefon: +49 151 46330766</p>
+            <p><strong>Anschrift</strong><br>Herrengasse 16<br>88634 Herdwangen-Schönach</p>
+            <p><strong>Kontakt</strong><br>E-Mail: info@eventkitchen.net</p>
+            <p><strong>Umsatzsteuer</strong><br>Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz: falls vorhanden ergänzen</p>
+            <p><strong>Verbraucherstreitbeilegung</strong><br>Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
+            <p><strong>Haftung für Inhalte</strong><br>Als Diensteanbieter sind wir gemäß § 7 Abs. 1 DDG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 DDG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.</p>
+            <p><strong>Haftung für Links</strong><br>Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen.</p>
+            <p><strong>Urheberrecht</strong><br>Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="datenschutz" class="page hidden">
+      <div class="section">
+        <div class="container">
+          <div class="subtle">Datenschutz</div>
+          <h2>Datenschutzerklärung</h2>
+          <article class="card card-pad legal" style="margin-top:28px;">
+            <p><strong>1. Verantwortlicher</strong><br>Frank & Lamerdin Event Kitchen GbR<br>Herrengasse 16<br>88634 Herdwangen-Schönach<br>E-Mail: info@eventkitchen.net<br><br>Mathis Frank<br>Telefon: +49 163 4705637<br><br>Florian Lamerdin<br>Telefon: +49 151 46330766</p>
+            <p><strong>2. Allgemeine Hinweise</strong><br>Der Schutz Ihrer persönlichen Daten ist uns wichtig. Wir behandeln Ihre personenbezogenen Daten vertraulich und entsprechend den gesetzlichen Datenschutzvorschriften sowie dieser Datenschutzerklärung.</p>
+            <p><strong>3. Erhebung und Speicherung personenbezogener Daten beim Besuch der Website</strong><br>Beim Aufrufen dieser Website werden durch den Hosting-Anbieter automatisch Informationen in sogenannten Server-Logfiles erfasst. Dies sind insbesondere Browsertyp und Browserversion, verwendetes Betriebssystem, Referrer URL, Hostname des zugreifenden Rechners, Uhrzeit der Serveranfrage und IP-Adresse. Die Verarbeitung erfolgt zur technisch fehlerfreien Bereitstellung der Website auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO.</p>
+            <p><strong>4. Kontaktaufnahme</strong><br>Wenn Sie uns per E-Mail oder telefonisch kontaktieren, werden Ihre Angaben zwecks Bearbeitung der Anfrage und für den Fall von Anschlussfragen bei uns gespeichert oder verarbeitet. Die Verarbeitung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO, sofern Ihre Anfrage mit der Erfüllung eines Vertrags zusammenhängt, oder auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO aufgrund unseres berechtigten Interesses an der effizienten Bearbeitung der an uns gerichteten Anfragen.</p>
+            <p><strong>5. Hosting</strong><br>Diese Website wird bei einem externen Dienstleister gehostet. Die im Rahmen der Nutzung dieser Website erfassten personenbezogenen Daten werden auf den Servern des Hosters verarbeitet.</p>
+            <p><strong>6. Ihre Rechte</strong><br>Sie haben im Rahmen der geltenden gesetzlichen Bestimmungen jederzeit das Recht auf unentgeltliche Auskunft über Ihre gespeicherten personenbezogenen Daten, deren Herkunft und Empfänger und den Zweck der Datenverarbeitung sowie gegebenenfalls ein Recht auf Berichtigung, Löschung oder Einschränkung der Verarbeitung dieser Daten.</p>
+            <p><strong>7. Widerruf und Widerspruch</strong><br>Sofern eine Datenverarbeitung auf Ihrer Einwilligung beruht, können Sie diese Einwilligung jederzeit mit Wirkung für die Zukunft widerrufen.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">© Urheberrecht. Alle Rechte vorbehalten.</div>
+  </footer>
+
+  <script>
+    const pages = document.querySelectorAll('.page');
+    const links = document.querySelectorAll('[data-page]');
+    function showPage(id) {
+      pages.forEach(p => p.classList.toggle('hidden', p.id !== id));
+      history.replaceState(null, '', '#' + id);
+      window.scrollTo({ top:0, behavior:'smooth' });
+    }
+    links.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        showPage(link.dataset.page);
+      });
+    });
+
+    const startPage = location.hash ? location.hash.replace('#','') : 'startseite';
+    if (document.getElementById(startPage)) showPage(startPage);
+
+    document.getElementById('mailto-btn')?.addEventListener('click', () => {
+      const name = document.getElementById('anfrage-name')?.value || '';
+      const art = document.getElementById('anfrage-art')?.value || '';
+      const persons = document.getElementById('anfrage-personen')?.value || '';
+      const location = document.getElementById('anfrage-ort')?.value || '';
+      const food = document.getElementById('anfrage-speisen')?.value || '';
+      const purpose = document.getElementById('anfrage-zweck')?.value || '';
+      const subject = encodeURIComponent('Preisanfrage Event Kitchen');
+      const body = encodeURIComponent(
+        `Name: ${name}\nPrivat/Gewerblich: ${art}\nPersonenanzahl: ${persons}\nVeranstaltungsort: ${location}\nGewünschte Speisen: ${food}\nVeranstaltungsart: ${purpose}`
+      );
+      window.location.href = `mailto:info@eventkitchen.net?subject=${subject}&body=${body}`;
+    });
+  </script>
+
+  <script>
+    const mobileMenuButton = document.querySelector('.mobile-menu-toggle');
+    if (mobileMenuButton) {
+      mobileMenuButton.addEventListener('click', () => {
+        const isOpen = document.body.classList.toggle('mobile-menu-open');
+        mobileMenuButton.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        mobileMenuButton.textContent = isOpen ? 'Schließen' : 'Menü';
+      });
+
+      document.querySelectorAll('nav a, .nav-links a, .menu a').forEach((link) => {
+        link.addEventListener('click', () => {
+          document.body.classList.remove('mobile-menu-open');
+          mobileMenuButton.setAttribute('aria-expanded', 'false');
+          mobileMenuButton.textContent = 'Menü';
+        });
+      });
+    }
+  </script>
+
+</body>
+</html>
