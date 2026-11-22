@@ -316,9 +316,15 @@
             <div class="field"><label for="f-art">Privat oder gewerblich</label>
               <select id="f-art"><option value="">Bitte auswählen</option><option>Privat</option><option>Gewerblich</option></select></div>
             <div class="field"><label for="f-datum">Datum</label><input id="f-datum" type="text" placeholder="z. B. 14.06.2027"></div>
-            <div class="field"><label for="f-personen">Personenanzahl</label><input id="f-personen" type="text" placeholder="ungefähre Gästezahl"></div>
+            <div class="field"><label for="f-personen">Personenanzahl</label><input id="f-personen" type="number" min="1" step="1" placeholder="ungefähre Gästezahl (berechnet ab 50 Personen)"></div>
             <div class="field"><label for="f-ort">Veranstaltungsort</label><input id="f-ort" type="text"></div>
             <div class="field"><label for="f-speisen">Gewünschte Speisen</label><input id="f-speisen" type="text" placeholder="Dinnele, Pizza oder beides"></div>
+            <div class="field"><label for="f-dauer">Gewünschte Verkaufszeit</label>
+              <select id="f-dauer"><option value="">Bitte auswählen</option><option>3 Stunden (Standard)</option><option>3,5 Stunden</option><option>4 Stunden</option><option>4,5 Stunden</option><option>5 Stunden</option><option>5,5 Stunden</option><option>6 Stunden</option><option>Länger (bitte in der Nachricht angeben)</option></select></div>
+            <div class="field"><label for="f-modell">Abrechnung</label>
+              <select id="f-modell"><option value="">Bitte auswählen</option><option>Marken – 1 Portion pro Person</option><option>Marken – 2 Portionen pro Person</option><option>Flatrate – unbegrenzt während der Verkaufszeit</option><option>Noch unsicher – bitte beraten</option></select></div>
+            <div class="field"><label for="f-zeit">Uhrzeit (Beginn Verkauf)</label><input id="f-zeit" type="text" placeholder="z. B. 18:00 Uhr"></div>
+            <div class="field"><label for="f-tel">Telefon (für Rückfragen)</label><input id="f-tel" type="tel" autocomplete="tel"></div>
             <div class="field full"><label for="f-text">Art der Veranstaltung / Nachricht</label><textarea id="f-text" placeholder="z. B. Firmenfeier, Hochzeit, Festival, Stadtfest"></textarea></div>
           </div>
           <div class="btn-row" style="justify-content:flex-start;"><button class="btn btn-accent" type="submit">Angebot anfragen</button></div>
@@ -424,6 +430,10 @@
         'Personenanzahl: ' + v('f-personen'),
         'Veranstaltungsort: ' + v('f-ort'),
         'Gewünschte Speisen: ' + v('f-speisen'),
+        'Gewünschte Verkaufszeit: ' + v('f-dauer'),
+        'Beginn Verkauf: ' + v('f-zeit'),
+        'Abrechnung: ' + v('f-modell'),
+        'Telefon: ' + v('f-tel'),
         '', v('f-text')
       ].join('\n');
       location.href = 'mailto:info@eventkitchen.net?subject=' + encodeURIComponent('Anfrage Event Kitchen') + '&body=' + encodeURIComponent(body);
