@@ -42,6 +42,7 @@
       border-bottom:1px solid var(--line);
     }
     .topbar {
+      position:relative;
       display:flex; align-items:center; justify-content:space-between; gap:20px;
       padding:18px 0;
     }
@@ -138,6 +139,10 @@
     .product-box {
       min-height:220px;
     }
+    .product-box:not(:has(img)) h3 { margin-top:4px; }
+    .menu-btn { display:none; background:none; border:1px solid var(--line); color:var(--text); border-radius:12px; padding:8px 12px; font-size:22px; line-height:1; }
+    .strip { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-bottom:24px; }
+    .strip img { width:100%; height:260px; object-fit:cover; }
     .sortenbild {
       display:flex; align-items:center; justify-content:center; text-align:center;
       height:200px; border:1px dashed var(--line); border-radius:18px; color:#7d7268;
@@ -175,7 +180,12 @@
         grid-template-columns:1fr;
       }
       .hero-media img { height:360px; }
-      nav { display:none; }
+      .menu-btn { display:block; }
+      nav { display:none; position:absolute; top:100%; left:0; right:0; flex-direction:column; gap:0; background:rgba(18,14,11,.98); border-bottom:1px solid var(--line); padding:8px 22px 16px; }
+      nav.open { display:flex; }
+      nav a { padding:12px 0; border-bottom:1px solid var(--line); font-size:17px; }
+      .strip { grid-template-columns:1fr; }
+      .gallery-grid img { height:240px; }
       .section { padding:52px 0; }
     }
   
@@ -197,7 +207,8 @@
   <header>
     <div class="container topbar">
       <a href="#" class="brand" data-page="startseite">Event Kitchen</a>
-      <nav>
+      <button class="menu-btn" id="menu-btn" aria-label="Menü öffnen" aria-expanded="false">☰</button>
+      <nav id="main-nav">
         <a href="#" data-page="startseite">Startseite</a>
         <a href="#" data-page="ueber-uns">Über uns</a>
         <a href="#" data-page="services">Services</a>
@@ -223,7 +234,7 @@
             </div>
           </div>
           <div class="card hero-media">
-            <img src="hero.jpg" alt="Event Kitchen Stand bei Nacht">
+            <img src="hero.jpg" alt="Event Kitchen Stand mit Holzofen in der Abenddämmerung">
           </div>
         </div>
       </div>
@@ -231,7 +242,7 @@
       <div class="section" style="background:#120f0d;">
         <div class="container grid-2">
           <article class="card service-card">
-            <img src="dinnele_card.jpg" alt="Köstliche Dinnele">
+            <img src="dinnele_card.jpg" alt="Frisch gebackene Dinnele auf dem Blech">
             <div class="card-pad">
               <h3>Köstliche Dinnele</h3>
               <p class="muted" style="margin-top:16px;">Genießen Sie die traditionelle Spezialität aus Baden. Frisch aus unserem Holzofen.</p>
@@ -271,7 +282,7 @@
             </article>
 
             <article class="card">
-              <div class="placeholder" style="min-height:280px;">Platz für ein neues Bild</div>
+              <img src="mathis_stand.jpg" alt="Mathis Frank am Event-Kitchen-Stand" style="width:100%; height:100%; min-height:280px; max-height:420px; object-fit:cover;">
             </article>
           </div>
 
@@ -297,6 +308,12 @@
             <h3>Festliche Stimmung</h3>
             <p class="muted" style="margin-top:16px;">Wir sorgen für gute Stimmung und ein unvergessliches Erlebnis. Unser Stand fällt auf, bringt Atmosphäre auf das Eventgelände und verbindet frische Zubereitung mit einem starken Auftritt.</p>
           </article>
+
+          <div class="strip">
+            <div class="card"><img src="stand_nacht.jpg" alt="Event-Kitchen-Stand am Abend mit Lichterketten" loading="lazy"></div>
+            <div class="card"><img src="ofen_dampf_2.jpg" alt="Dinnele kommen aus dem Holzofen" loading="lazy"></div>
+            <div class="card"><img src="sorten_platte.jpg" alt="Verschiedene Dinnele-Sorten auf dem Blech" loading="lazy"></div>
+          </div>
 
           <div class="split">
             <div>
@@ -391,29 +408,29 @@
             <h3 style="font-size:34px;">Dinnele</h3>
             <div class="grid-products" style="margin-top:22px;">
               <article class="card card-pad product-box">
-                  <img class="product-img" src="gemuese-vegan.png" alt="Dinnele Gemüse-Vegan">
+                  <img class="product-img" src="img/zwiebel-speck.jpg" alt="Dinnele Zwiebel-Speck" loading="lazy">
                   <h3 style="font-size:22px;">Zwiebel-Speck Dinnele</h3>
                   <p class="muted" style="margin-top:14px;">Unsere Zwiebel-Speck Dinnele kombiniert zarte Zwiebeln mit knusprigem Speck, perfekt abgerundet mit einem herzhaften Teig. Diese zeitlose Variante ist ein echter Genuss für alle Liebhaber deftiger Speisen.</p>
                 </article><article class="card card-pad product-box">
-                  <img class="product-img" src="kartoffel-speck.png" alt="Dinnele Kartoffel-Speck">
-                  <h3 style="font-size:22px;">Gemüse-Käse</h3>
-                  <p class="muted" style="margin-top:14px;">Buntes, frisches Gemüse wie Karotten, Zucchini und Zwiebeln vereint sich mit geschmolzenem Käse zu einer wunderbar würzigen Kreation. Diese Dinnele-Variante bietet eine köstliche Mischung aus knackiger Frische und cremigem Käsegenuss.</p>
-                </article><article class="card card-pad product-box">
-                  <img class="product-img" src="kartoffel-kaese.png" alt="Dinnele Kartoffel-Käse">
+                  <img class="product-img" src="img/zwiebel-kaese.jpg" alt="Dinnele Zwiebel-Käse" loading="lazy">
                   <h3 style="font-size:22px;">Zwiebel-Käse</h3>
                   <p class="muted" style="margin-top:14px;">Unsere Zwiebel-Käse-Dinnele vereint die feine Süße goldbraun gebackener Zwiebeln mit herzhaft geschmolzenem Käse auf unserem würzigen Hefeteig.</p>
                 </article><article class="card card-pad product-box">
-                  <img class="product-img" src="kartoffel-speck.png" alt="Dinnele Kartoffel-Speck">
-                  <h3 style="font-size:22px;">Gemüse-Vegan Dinnele</h3>
-                  <p class="muted" style="margin-top:14px;">Für die veganen Feinschmecker bieten wir unsere Gemüse-Vegan Dinnele an. Eine bunte Mischung aus frischem Gemüse wie knackigen Karotten, zarten Zucchini und aromatischen Zwiebeln.</p>
-                </article><article class="card card-pad product-box">
-                  <img class="product-img" src="kartoffel-kaese.png" alt="Dinnele Kartoffel-Käse">
+                  <img class="product-img" src="img/kartoffel-speck.jpg" alt="Dinnele Kartoffel-Speck" loading="lazy">
                   <h3 style="font-size:22px;">Kartoffel-Speck</h3>
                   <p class="muted" style="margin-top:14px;">Knuspriger Speck und feine Kartoffelscheiben machen dieses Dinnele zu einer herzhaften Spezialität. Die perfekte Balance aus deftigem Geschmack und zartem Teig sorgt für ein unvergleichliches Geschmackserlebnis.</p>
                 </article><article class="card card-pad product-box">
-                  <img class="product-img" src="pizza-margherita.png" alt="Pizza Margherita">
+                  <img class="product-img" src="img/kartoffel-kaese.jpg" alt="Dinnele Kartoffel-Käse" loading="lazy">
                   <h3 style="font-size:22px;">Kartoffel-Käse</h3>
                   <p class="muted" style="margin-top:14px;">Cremige, hauchdünne Kartoffelscheiben treffen auf zart schmelzenden Käse und unseren aromatischen Hefeteig. Ein echter Klassiker für Käse- und Kartoffelliebhaber.</p>
+                </article><article class="card card-pad product-box">
+                  <img class="product-img" src="img/gemuese-kaese.jpg" alt="Dinnele Gemüse-Käse" loading="lazy">
+                  <h3 style="font-size:22px;">Gemüse-Käse</h3>
+                  <p class="muted" style="margin-top:14px;">Buntes, frisches Gemüse wie Karotten, Zucchini und Zwiebeln vereint sich mit geschmolzenem Käse zu einer wunderbar würzigen Kreation. Diese Dinnele-Variante bietet eine köstliche Mischung aus knackiger Frische und cremigem Käsegenuss.</p>
+                </article><article class="card card-pad product-box">
+                  <img class="product-img" src="img/gemuese-vegan.jpg" alt="Dinnele Gemüse-Vegan" loading="lazy">
+                  <h3 style="font-size:22px;">Gemüse-Vegan Dinnele</h3>
+                  <p class="muted" style="margin-top:14px;">Für die veganen Feinschmecker bieten wir unsere Gemüse-Vegan Dinnele an. Eine bunte Mischung aus frischem Gemüse wie knackigen Karotten, zarten Zucchini und aromatischen Zwiebeln.</p>
                 </article>
             </div>
           </div>
@@ -422,15 +439,14 @@
             <h3 style="font-size:34px;">Süße Dinnele</h3>
             <div class="grid-products" style="margin-top:22px;">
               <article class="card card-pad product-box">
-                <img class="product-img" src="pizza-funghi.png" alt="Pizza Funghi">
-                <h3 style="font-size:22px;">Apfel-Zimt</h3>
-                <p class="muted" style="margin-top:14px;">Fruchtige Äpfel kombiniert mit feinem Zimt auf knusprigem Teig. Warm serviert ein echter Klassiker.</p>
-              </article>
-              <article class="card card-pad product-box">
-                <img class="product-img" src="pizza-salami.png" alt="Pizza Salami">
-                <h3 style="font-size:22px;">Erdbeere-Schoko</h3>
-                <p class="muted" style="margin-top:14px;">Süße Erdbeeren und geschmolzene Schokolade auf frisch gebackenem Dinnele.</p>
-              </article>
+                  
+                  <h3 style="font-size:22px;">Apfel-Zimt</h3>
+                  <p class="muted" style="margin-top:14px;">Fruchtige Äpfel kombiniert mit feinem Zimt auf knusprigem Teig. Warm serviert ein echter Klassiker.</p>
+                </article><article class="card card-pad product-box">
+                  
+                  <h3 style="font-size:22px;">Erdbeere-Schoko</h3>
+                  <p class="muted" style="margin-top:14px;">Süße Erdbeeren und geschmolzene Schokolade auf frisch gebackenem Dinnele.</p>
+                </article>
             </div>
           </div>
 
@@ -438,34 +454,33 @@
             <h3 style="font-size:34px;">Pizza</h3>
             <div class="grid-products" style="margin-top:22px;">
               <article class="card card-pad product-box">
-                  <img class="product-img" src="pizza-prosciutto-funghi.png" alt="Pizza Prosciutto-Funghi">
+                  <img class="product-img" src="img/pizza-margherita.jpg" alt="Pizza Margherita" loading="lazy">
                   <h3 style="font-size:22px;">Klassische Margherita</h3>
                   <p class="muted" style="margin-top:14px;">Der italienische Klassiker in seiner reinsten Form. Ein luftig-knuspriger Teig, bestrichen mit fruchtiger Tomatensauce, belegt mit zart schmelzendem Mozzarella und verfeinert mit frischem Basilikum.</p>
                 </article><article class="card card-pad product-box">
-                  <img class="product-img" src="pizza-marinara.png" alt="Pizza Marinara">
-                  <h3 style="font-size:22px;">Funghi</h3>
-                  <p class="muted" style="margin-top:14px;">Aromatische Champignons auf einer herzhaften Tomatensauce, kombiniert mit cremigem Mozzarella, sorgen für ein wunderbar ausgewogenes Geschmackserlebnis.</p>
-                </article><article class="card card-pad product-box">
-                  <div class="sortenbild">Platz für Sortenbild</div>
+                  <img class="product-img" src="img/pizza-marinara.jpg" alt="Pizza Marinara (vegan)" loading="lazy">
                   <h3 style="font-size:22px;">Vegane Marinara</h3>
                   <p class="muted" style="margin-top:14px;">Unsere vegane Marinara bietet Ihnen ein unvergleichliches Geschmackserlebnis mit knusprigem Teig, erstklassiger Tomatensoße und frischem Knoblauch.</p>
                 </article><article class="card card-pad product-box">
-                  <div class="sortenbild">Platz für Sortenbild</div>
+                  <img class="product-img" src="img/pizza-funghi.jpg" alt="Pizza Funghi" loading="lazy">
+                  <h3 style="font-size:22px;">Funghi</h3>
+                  <p class="muted" style="margin-top:14px;">Aromatische Champignons auf einer herzhaften Tomatensauce, kombiniert mit cremigem Mozzarella, sorgen für ein wunderbar ausgewogenes Geschmackserlebnis.</p>
+                </article><article class="card card-pad product-box">
+                  <img class="product-img" src="img/pizza-salami.jpg" alt="Pizza Salami" loading="lazy">
                   <h3 style="font-size:22px;">Salami</h3>
                   <p class="muted" style="margin-top:14px;">Würzige Salami, geschmolzener Mozzarella und eine fruchtige Tomatensauce. Eine unschlagbare Kombination für alle Liebhaber kräftiger Aromen.</p>
-                </article>
-              <article class="card card-pad product-box">
-                <img class="product-img" src="pizza-diavolo.png" alt="Pizza Diavolo">
-                <h3 style="font-size:22px;">Diavolo</h3>
-                <p class="muted" style="margin-top:14px;">Mit Tomatensoße, Käse, Salami und scharfer Peperoni.</p>
-              </article><article class="card card-pad product-box">
-                  <div class="sortenbild">Platz für Sortenbild</div>
-                  <h3 style="font-size:22px;">Prosciutto</h3>
-                  <p class="muted" style="margin-top:14px;">Saftiger, herzhafter Schinken auf einer aromatischen Tomatensauce, getoppt mit cremigem Mozzarella. Diese Pizza überzeugt mit ihrem perfekten Zusammenspiel aus deftigem Geschmack und feiner Würze.</p>
                 </article><article class="card card-pad product-box">
-                  <div class="sortenbild">Platz für Sortenbild</div>
+                  <img class="product-img" src="img/pizza-diavolo.jpg" alt="Pizza Diavolo" loading="lazy">
+                  <h3 style="font-size:22px;">Diavolo</h3>
+                  <p class="muted" style="margin-top:14px;">Mit Tomatensoße, Käse, Salami und scharfer Peperoni.</p>
+                </article><article class="card card-pad product-box">
+                  <img class="product-img" src="img/pizza-prosciutto-funghi.jpg" alt="Pizza Prosciutto-Funghi" loading="lazy">
                   <h3 style="font-size:22px;">Prosciutto-Funghi</h3>
                   <p class="muted" style="margin-top:14px;">Feine Champignons und herzhafter Schinken treffen auf eine fruchtige Tomatensauce und zart schmelzenden Mozzarella.</p>
+                </article><article class="card card-pad product-box">
+                  
+                  <h3 style="font-size:22px;">Prosciutto</h3>
+                  <p class="muted" style="margin-top:14px;">Saftiger, herzhafter Schinken auf einer aromatischen Tomatensauce, getoppt mit cremigem Mozzarella. Diese Pizza überzeugt mit ihrem perfekten Zusammenspiel aus deftigem Geschmack und feiner Würze.</p>
                 </article>
             </div>
           </div>
@@ -479,7 +494,7 @@
           <div class="subtle">Galerie</div>
           <h2>Einblicke in unseren Auftritt</h2>
           <div class="gallery-grid" style="margin-top:28px;">
-            <div class="card"><img src="galerie_01.jpg" alt="Galeriebild"></div><div class="card"><img src="galerie_02.jpg" alt="Galeriebild"></div><div class="card"><img src="galerie_03.jpg" alt="Galeriebild"></div><div class="card"><img src="galerie_04.jpg" alt="Galeriebild"></div><div class="card"><img src="galerie_05.jpg" alt="Galeriebild"></div><div class="card"><img src="galerie_06.jpg" alt="Galeriebild"></div><div class="card"><img src="galerie_07.jpg" alt="Galeriebild"></div><div class="card"><img src="galerie_08.jpg" alt="Galeriebild"></div><div class="card"><img src="galerie_09.jpg" alt="Galeriebild"></div><div class="card"><img src="galerie_10.jpg" alt="Galeriebild"></div><div class="card"><img src="galerie_11.jpg" alt="Galeriebild"></div><div class="card"><img src="galerie_12.jpg" alt="Galeriebild"></div><div class="card"><img src="galerie_13.jpg" alt="Galeriebild"></div><div class="card"><img src="galerie_14.jpg" alt="Galeriebild"></div><div class="card"><img src="galerie_15.jpg" alt="Galeriebild"></div><div class="card"><img src="galerie_16.jpg" alt="Galeriebild"></div><div class="card"><img src="galerie_17.jpg" alt="Galeriebild"></div><div class="card"><img src="galerie_18.jpg" alt="Galeriebild"></div><div class="card"><img src="galerie_19.jpg" alt="Galeriebild"></div><div class="card"><img src="galerie_20.jpg" alt="Galeriebild"></div><div class="card"><img src="galerie_21.jpg" alt="Galeriebild"></div><div class="card"><img src="galerie_22.jpg" alt="Galeriebild"></div><div class="card"><img src="galerie_23.jpg" alt="Galeriebild"></div><div class="card"><img src="galerie_24.jpg" alt="Galeriebild"></div><div class="card"><img src="galerie_25.jpg" alt="Galeriebild"></div><div class="card"><img src="galerie_26.jpg" alt="Galeriebild"></div><div class="card"><img src="galerie_27.jpg" alt="Galeriebild"></div><div class="card"><img src="galerie_28.jpg" alt="Galeriebild"></div><div class="card"><img src="galerie_29.jpg" alt="Galeriebild"></div><div class="card"><img src="galerie_30.jpg" alt="Galeriebild"></div><div class="card"><img src="galerie_31.jpg" alt="Galeriebild"></div><div class="card"><img src="galerie_32.jpg" alt="Galeriebild"></div>
+            <div class="card"><img src="galerie_01.jpg" alt="Event Kitchen Galeriebild" loading="lazy"></div><div class="card"><img src="galerie_02.jpg" alt="Event Kitchen Galeriebild" loading="lazy"></div><div class="card"><img src="galerie_03.jpg" alt="Event Kitchen Galeriebild" loading="lazy"></div><div class="card"><img src="galerie_04.jpg" alt="Event Kitchen Galeriebild" loading="lazy"></div><div class="card"><img src="galerie_05.jpg" alt="Event Kitchen Galeriebild" loading="lazy"></div><div class="card"><img src="galerie_06.jpg" alt="Event Kitchen Galeriebild" loading="lazy"></div><div class="card"><img src="galerie_07.jpg" alt="Event Kitchen Galeriebild" loading="lazy"></div><div class="card"><img src="galerie_08.jpg" alt="Event Kitchen Galeriebild" loading="lazy"></div><div class="card"><img src="galerie_09.jpg" alt="Event Kitchen Galeriebild" loading="lazy"></div><div class="card"><img src="galerie_10.jpg" alt="Event Kitchen Galeriebild" loading="lazy"></div><div class="card"><img src="galerie_11.jpg" alt="Event Kitchen Galeriebild" loading="lazy"></div><div class="card"><img src="galerie_12.jpg" alt="Event Kitchen Galeriebild" loading="lazy"></div><div class="card"><img src="galerie_13.jpg" alt="Event Kitchen Galeriebild" loading="lazy"></div><div class="card"><img src="galerie_14.jpg" alt="Event Kitchen Galeriebild" loading="lazy"></div><div class="card"><img src="galerie_15.jpg" alt="Event Kitchen Galeriebild" loading="lazy"></div><div class="card"><img src="galerie_16.jpg" alt="Event Kitchen Galeriebild" loading="lazy"></div><div class="card"><img src="galerie_17.jpg" alt="Event Kitchen Galeriebild" loading="lazy"></div><div class="card"><img src="galerie_18.jpg" alt="Event Kitchen Galeriebild" loading="lazy"></div><div class="card"><img src="galerie_19.jpg" alt="Event Kitchen Galeriebild" loading="lazy"></div><div class="card"><img src="galerie_20.jpg" alt="Event Kitchen Galeriebild" loading="lazy"></div><div class="card"><img src="galerie_21.jpg" alt="Event Kitchen Galeriebild" loading="lazy"></div><div class="card"><img src="galerie_22.jpg" alt="Event Kitchen Galeriebild" loading="lazy"></div><div class="card"><img src="galerie_23.jpg" alt="Event Kitchen Galeriebild" loading="lazy"></div><div class="card"><img src="galerie_24.jpg" alt="Event Kitchen Galeriebild" loading="lazy"></div><div class="card"><img src="galerie_25.jpg" alt="Event Kitchen Galeriebild" loading="lazy"></div><div class="card"><img src="galerie_26.jpg" alt="Event Kitchen Galeriebild" loading="lazy"></div><div class="card"><img src="galerie_27.jpg" alt="Event Kitchen Galeriebild" loading="lazy"></div><div class="card"><img src="galerie_28.jpg" alt="Event Kitchen Galeriebild" loading="lazy"></div><div class="card"><img src="galerie_29.jpg" alt="Event Kitchen Galeriebild" loading="lazy"></div><div class="card"><img src="galerie_30.jpg" alt="Event Kitchen Galeriebild" loading="lazy"></div><div class="card"><img src="galerie_31.jpg" alt="Event Kitchen Galeriebild" loading="lazy"></div><div class="card"><img src="galerie_32.jpg" alt="Event Kitchen Galeriebild" loading="lazy"></div>
           </div>
         </div>
       </div>
@@ -524,7 +539,7 @@
             </article>
 
             <article class="card contact-media">
-              <img src="kontakt.jpg" alt="Event Kitchen Kontaktbild">
+              <img src="stand_abend.jpg" alt="Event-Kitchen-Stand mit Holzofen am Abend">
             </article>
           </div>
         </div>
@@ -542,7 +557,7 @@
             <p><strong>Gesellschafter und vertretungsberechtigte Personen</strong><br>Mathis Frank<br>Telefon: +49 163 4705637<br><br>Florian Lamerdin<br>Telefon: +49 151 46330766</p>
             <p><strong>Anschrift</strong><br>Herrengasse 16<br>88634 Herdwangen-Schönach</p>
             <p><strong>Kontakt</strong><br>E-Mail: info@eventkitchen.net</p>
-            <p><strong>Umsatzsteuer</strong><br>Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz: falls vorhanden ergänzen</p>
+            <p><strong>Umsatzsteuer</strong><br>Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz: DE461925790</p>
             <p><strong>Verbraucherstreitbeilegung</strong><br>Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
             <p><strong>Haftung für Inhalte</strong><br>Als Diensteanbieter sind wir gemäß § 7 Abs. 1 DDG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 DDG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.</p>
             <p><strong>Haftung für Links</strong><br>Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen.</p>
@@ -562,7 +577,7 @@
             <p><strong>2. Allgemeine Hinweise</strong><br>Der Schutz Ihrer persönlichen Daten ist uns wichtig. Wir behandeln Ihre personenbezogenen Daten vertraulich und entsprechend den gesetzlichen Datenschutzvorschriften sowie dieser Datenschutzerklärung.</p>
             <p><strong>3. Erhebung und Speicherung personenbezogener Daten beim Besuch der Website</strong><br>Beim Aufrufen dieser Website werden durch den Hosting-Anbieter automatisch Informationen in sogenannten Server-Logfiles erfasst. Dies sind insbesondere Browsertyp und Browserversion, verwendetes Betriebssystem, Referrer URL, Hostname des zugreifenden Rechners, Uhrzeit der Serveranfrage und IP-Adresse. Die Verarbeitung erfolgt zur technisch fehlerfreien Bereitstellung der Website auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO.</p>
             <p><strong>4. Kontaktaufnahme</strong><br>Wenn Sie uns per E-Mail oder telefonisch kontaktieren, werden Ihre Angaben zwecks Bearbeitung der Anfrage und für den Fall von Anschlussfragen bei uns gespeichert oder verarbeitet. Die Verarbeitung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO, sofern Ihre Anfrage mit der Erfüllung eines Vertrags zusammenhängt, oder auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO aufgrund unseres berechtigten Interesses an der effizienten Bearbeitung der an uns gerichteten Anfragen.</p>
-            <p><strong>5. Hosting</strong><br>Diese Website wird bei einem externen Dienstleister gehostet. Die im Rahmen der Nutzung dieser Website erfassten personenbezogenen Daten werden auf den Servern des Hosters verarbeitet.</p>
+            <p><strong>5. Hosting</strong><br>Diese Website wird über GitHub Pages gehostet (GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA). Beim Aufruf der Website verarbeitet GitHub technisch notwendige Daten wie die IP-Adresse in Server-Logfiles. Dabei kann eine Übermittlung in die USA stattfinden. Die Verarbeitung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO.</p>
             <p><strong>6. Ihre Rechte</strong><br>Sie haben im Rahmen der geltenden gesetzlichen Bestimmungen jederzeit das Recht auf unentgeltliche Auskunft über Ihre gespeicherten personenbezogenen Daten, deren Herkunft und Empfänger und den Zweck der Datenverarbeitung sowie gegebenenfalls ein Recht auf Berichtigung, Löschung oder Einschränkung der Verarbeitung dieser Daten.</p>
             <p><strong>7. Widerruf und Widerspruch</strong><br>Sofern eine Datenverarbeitung auf Ihrer Einwilligung beruht, können Sie diese Einwilligung jederzeit mit Wirkung für die Zukunft widerrufen.</p>
           </article>
@@ -572,7 +587,7 @@
   </main>
 
   <footer>
-    <div class="container">© Urheberrecht. Alle Rechte vorbehalten.</div>
+    <div class="container">© 2026 Frank &amp; Lamerdin Event Kitchen GbR · Alle Rechte vorbehalten.</div>
   </footer>
 
   <script>
@@ -587,7 +602,15 @@
       link.addEventListener('click', (e) => {
         e.preventDefault();
         showPage(link.dataset.page);
+        document.getElementById('main-nav').classList.remove('open');
+        document.getElementById('menu-btn').setAttribute('aria-expanded','false');
       });
+    });
+
+    document.getElementById('menu-btn').addEventListener('click', () => {
+      const nav = document.getElementById('main-nav');
+      const open = nav.classList.toggle('open');
+      document.getElementById('menu-btn').setAttribute('aria-expanded', open ? 'true' : 'false');
     });
 
     const startPage = location.hash ? location.hash.replace('#','') : 'startseite';
