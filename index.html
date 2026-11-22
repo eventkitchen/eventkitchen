@@ -100,6 +100,22 @@
     .sorts strong { display:block; font-family:var(--display); font-weight:700; text-transform:uppercase; letter-spacing:.04em; color:#fff; font-size:19px; }
     .sorts span { font-size:15px; }
     .new-note { font-size:15px; color:#b9b3ab; margin-top:16px; }
+    .stands { display:grid; grid-template-columns:1fr auto 1fr; gap:18px; align-items:stretch; margin:40px auto 0; max-width:940px; }
+    .stand-card { background:#fff; border:1px solid var(--line); border-top:4px solid var(--accent); border-radius:6px; padding:24px 26px; }
+    .stand-card.dark { background:var(--ink); border-color:var(--ink); border-top-color:var(--accent); color:#d9d5cf; }
+    .stand-card h3 { font-size:28px; margin:4px 0 8px; }
+    .stand-card.dark h3 { color:#fff; }
+    .stand-card p { margin:0; }
+    .stand-kicker { font-family:var(--display); font-weight:700; text-transform:uppercase; letter-spacing:.08em; font-size:14px; color:var(--accent); }
+    .stand-card .or { display:inline-block; font-size:.6em; vertical-align:middle; background:var(--accent); color:#fff; padding:2px 9px; border-radius:30px; letter-spacing:.06em; text-transform:uppercase; }
+    .stand-plus { align-self:center; font-family:var(--display); font-weight:700; font-size:40px; color:var(--accent); line-height:1; }
+    .stands-note { text-align:center; color:var(--muted); font-size:15px; margin:14px 0 0; }
+    .new-grid { grid-template-columns:1.15fr auto .85fr; align-items:stretch; }
+    .new-or { align-self:center; font-family:var(--display); font-weight:700; text-transform:uppercase; letter-spacing:.08em; font-size:15px; color:#fff; background:var(--accent); width:62px; height:62px; border-radius:50%; display:flex; align-items:center; justify-content:center; }
+    .stand-group { border:1px solid var(--line); border-radius:6px; padding:14px 16px 16px; margin-top:12px; }
+    .stand-title { margin:0 0 10px; font-family:var(--display); font-weight:700; text-transform:uppercase; letter-spacing:.05em; font-size:15px; color:var(--accent-dark); }
+    .stand-title small { display:block; font-family:var(--body); font-weight:400; text-transform:none; letter-spacing:0; font-size:14px; color:var(--muted); margin-top:2px; }
+    .stand-title small b { color:var(--ink); }
 
     /* Split */
     .split { display:grid; grid-template-columns:1fr 1fr; align-items:stretch; }
@@ -171,7 +187,8 @@
       .nav-links a { padding:12px 0; border-bottom:1px solid rgba(255,255,255,.1); font-size:19px; }
       .nav-inner { position:relative; }
       .products { grid-template-columns:repeat(2, 1fr); }
-      .split, .contact-grid, .new-grid { grid-template-columns:1fr; }
+      .split, .contact-grid, .new-grid, .stands { grid-template-columns:1fr; }
+      .new-or, .stand-plus { justify-self:center; }
       .split-img { min-height:300px; }
       .split.reverse .split-img { order:-1; }
       .band { grid-template-columns:repeat(2, 1fr); }
@@ -248,8 +265,23 @@
         <div class="center">
           <svg class="icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><circle cx="32" cy="32" r="29"/><path d="M22 18v12a4 4 0 0 0 8 0V18M26 18v28M40 18c-4 3-5 9-4 14h4v14" stroke-linecap="round" stroke-linejoin="round"/></svg>
           <h2>Lecker, frisch, aus dem Holzofen –<br>unsere Speisen</h2>
-          <p class="intro">Dinnele sind die badische Spezialität vom Blech: dünner, knuspriger Hefeteig mit herzhaftem oder süßem Belag. Dazu backen wir klassische Pizza. Neu ab Sommer 2027: Crispy Cheese Potatoes und Sloppy Joe Burger. Die Auswahl stimmen wir auf Ihr Event ab.</p>
+          <p class="intro">Dinnele sind die badische Spezialität vom Blech: dünner, knuspriger Hefeteig mit herzhaftem oder süßem Belag. Dazu backen wir klassische Pizza. Die Auswahl stimmen wir auf Ihr Event ab.</p>
         </div>
+
+        <div class="stands">
+          <div class="stand-card">
+            <div class="stand-kicker">Stand 1 · Holzofen</div>
+            <h3>Dinnele &amp; Pizza</h3>
+            <p>Herzhafte und süße Dinnele sowie Pizza – alles aus einem Holzofen, an einem Stand.</p>
+          </div>
+          <div class="stand-plus" aria-hidden="true">+</div>
+          <div class="stand-card dark">
+            <div class="stand-kicker">Stand 2 · Neu ab Sommer 2027</div>
+            <h3>Crispy Cheese Potatoes <span class="or">oder</span> Sloppy Joe Burger</h3>
+            <p>Pro Event bieten wir an diesem Stand eine der beiden Spezialitäten an.</p>
+          </div>
+        </div>
+        <p class="stands-note">Beide Stände sind einzeln buchbar oder zusammen auf einem Event.</p>
 
         <div class="menu-head"><h3>Dinnele herzhaft</h3><span>Unsere Klassiker vom Blech</span></div>
         <div class="products">
@@ -278,7 +310,7 @@
           <article class="product noimg"><div class="body"><h3>Prosciutto</h3><p>Saftiger, herzhafter Schinken auf aromatischer Tomatensauce, getoppt mit cremigem Mozzarella.</p></div></article>
         </div>
 
-        <div class="menu-head"><h3>Neu ab Sommer 2027</h3><span>Von unserem vierten Stand</span></div>
+        <div class="menu-head"><h3>Neu ab Sommer 2027</h3><span>Stand 2 – wahlweise eine der beiden Spezialitäten</span></div>
         <div class="new-grid">
           <article class="new-card">
             <div class="new-tag">Neu</div>
@@ -291,11 +323,12 @@
               <li><strong>Hot ’n’ Cheese</strong><span>mit Jalapeños und scharfer Chili-Note</span></li>
             </ul>
           </article>
+          <div class="new-or" aria-hidden="true">oder</div>
           <article class="new-card">
             <div class="new-tag">Neu</div>
             <h3>Sloppy Joe Burger</h3>
             <p>Geröstetes Brioche-Brötchen mit würziger Rinderhackfleischsoße aus Tomaten und Zwiebeln, dazu Mayonnaise und knackiger Karottenslaw mit Frühlingszwiebeln.</p>
-            <p class="new-note">Unsere neuen Produkte gibt es an einem eigenen Stand – einzeln oder kombiniert mit unseren Dinnele- und Pizza-Ständen.</p>
+            <p class="new-note">Crispy Cheese Potatoes oder Sloppy Joe Burger: An unserem zweiten Stand gibt es pro Event eine der beiden Spezialitäten – einzeln buchbar oder zusammen mit unserem Holzofen-Stand für Dinnele und Pizza.</p>
           </article>
         </div>
       </div>
@@ -343,12 +376,19 @@
               <select id="f-dauer"><option value="">Bitte auswählen</option><option>3 Stunden (Standard)</option><option>3,5 Stunden</option><option>4 Stunden</option><option>4,5 Stunden</option><option>5 Stunden</option><option>5,5 Stunden</option><option>6 Stunden</option><option>Länger (bitte in der Nachricht angeben)</option></select></div>
             <fieldset class="field full choice">
               <legend>Gewünschte Speisen</legend>
-              <p class="hint">Mehrfachauswahl möglich. Nach dem Anklicken eines Produkts können Sie die Sorten wählen.</p>
-              <div class="chips"><label class="chip"><input type="checkbox" name="produkt" value="Dinnele herzhaft" data-sorten="dh"><span>Dinnele herzhaft</span></label><label class="chip"><input type="checkbox" name="produkt" value="Dinnele süß" data-sorten="ds"><span>Dinnele süß</span></label><label class="chip"><input type="checkbox" name="produkt" value="Pizza" data-sorten="pz"><span>Pizza</span></label><label class="chip"><input type="checkbox" name="produkt" value="Crispy Cheese Potatoes" data-sorten="cp"><span>Crispy Cheese Potatoes<em>neu 2027</em></span></label><label class="chip"><input type="checkbox" name="produkt" value="Sloppy Joe Burger" data-sorten="sj"><span>Sloppy Joe Burger<em>neu 2027</em></span></label></div>
-              <div class="sorten" id="sorten-dh"><p>Sorten Dinnele herzhaft</p><div class="chips"><label class="chip small"><input type="checkbox" name="sorte-dh" value="Zwiebel-Speck"><span>Zwiebel-Speck</span></label><label class="chip small"><input type="checkbox" name="sorte-dh" value="Zwiebel-Käse"><span>Zwiebel-Käse</span></label><label class="chip small"><input type="checkbox" name="sorte-dh" value="Kartoffel-Speck"><span>Kartoffel-Speck</span></label><label class="chip small"><input type="checkbox" name="sorte-dh" value="Kartoffel-Käse"><span>Kartoffel-Käse</span></label><label class="chip small"><input type="checkbox" name="sorte-dh" value="Gemüse-Käse"><span>Gemüse-Käse</span></label><label class="chip small"><input type="checkbox" name="sorte-dh" value="Gemüse-Vegan"><span>Gemüse-Vegan</span></label></div></div>
-              <div class="sorten" id="sorten-ds"><p>Sorten Dinnele süß</p><div class="chips"><label class="chip small"><input type="checkbox" name="sorte-ds" value="Apfel-Zimt"><span>Apfel-Zimt</span></label><label class="chip small"><input type="checkbox" name="sorte-ds" value="Erdbeere-Schoko"><span>Erdbeere-Schoko</span></label></div></div>
-              <div class="sorten" id="sorten-pz"><p>Sorten Pizza</p><div class="chips"><label class="chip small"><input type="checkbox" name="sorte-pz" value="Margherita"><span>Margherita</span></label><label class="chip small"><input type="checkbox" name="sorte-pz" value="Marinara (vegan)"><span>Marinara (vegan)</span></label><label class="chip small"><input type="checkbox" name="sorte-pz" value="Funghi"><span>Funghi</span></label><label class="chip small"><input type="checkbox" name="sorte-pz" value="Salami"><span>Salami</span></label><label class="chip small"><input type="checkbox" name="sorte-pz" value="Diavolo"><span>Diavolo</span></label><label class="chip small"><input type="checkbox" name="sorte-pz" value="Prosciutto-Funghi"><span>Prosciutto-Funghi</span></label><label class="chip small"><input type="checkbox" name="sorte-pz" value="Prosciutto"><span>Prosciutto</span></label></div></div>
-              <div class="sorten" id="sorten-cp"><p>Sorten Crispy Cheese Potatoes</p><div class="chips"><label class="chip small"><input type="checkbox" name="sorte-cp" value="Classic"><span>Classic</span></label><label class="chip small"><input type="checkbox" name="sorte-cp" value="Cheesy Crunch"><span>Cheesy Crunch</span></label><label class="chip small"><input type="checkbox" name="sorte-cp" value="Green Vibe"><span>Green Vibe</span></label><label class="chip small"><input type="checkbox" name="sorte-cp" value="Hot ’n’ Cheese"><span>Hot ’n’ Cheese</span></label></div></div>
+              <p class="hint">Nach dem Anklicken eines Produkts können Sie die Sorten wählen. Beide Stände lassen sich kombinieren.</p>
+              <div class="stand-group">
+                <p class="stand-title">Stand 1 · Holzofen <small>Dinnele und Pizza – auch beides zusammen</small></p>
+                <div class="chips"><label class="chip"><input type="checkbox" name="produkt" value="Dinnele herzhaft" data-sorten="dh" data-stand="1"><span>Dinnele herzhaft</span></label><label class="chip"><input type="checkbox" name="produkt" value="Dinnele süß" data-sorten="ds" data-stand="1"><span>Dinnele süß</span></label><label class="chip"><input type="checkbox" name="produkt" value="Pizza" data-sorten="pz" data-stand="1"><span>Pizza</span></label></div>
+                <div class="sorten" id="sorten-dh"><p>Sorten Dinnele herzhaft</p><div class="chips"><label class="chip small"><input type="checkbox" name="sorte-dh" value="Zwiebel-Speck"><span>Zwiebel-Speck</span></label><label class="chip small"><input type="checkbox" name="sorte-dh" value="Zwiebel-Käse"><span>Zwiebel-Käse</span></label><label class="chip small"><input type="checkbox" name="sorte-dh" value="Kartoffel-Speck"><span>Kartoffel-Speck</span></label><label class="chip small"><input type="checkbox" name="sorte-dh" value="Kartoffel-Käse"><span>Kartoffel-Käse</span></label><label class="chip small"><input type="checkbox" name="sorte-dh" value="Gemüse-Käse"><span>Gemüse-Käse</span></label><label class="chip small"><input type="checkbox" name="sorte-dh" value="Gemüse-Vegan"><span>Gemüse-Vegan</span></label></div></div>
+                <div class="sorten" id="sorten-ds"><p>Sorten Dinnele süß</p><div class="chips"><label class="chip small"><input type="checkbox" name="sorte-ds" value="Apfel-Zimt"><span>Apfel-Zimt</span></label><label class="chip small"><input type="checkbox" name="sorte-ds" value="Erdbeere-Schoko"><span>Erdbeere-Schoko</span></label></div></div>
+                <div class="sorten" id="sorten-pz"><p>Sorten Pizza</p><div class="chips"><label class="chip small"><input type="checkbox" name="sorte-pz" value="Margherita"><span>Margherita</span></label><label class="chip small"><input type="checkbox" name="sorte-pz" value="Marinara (vegan)"><span>Marinara (vegan)</span></label><label class="chip small"><input type="checkbox" name="sorte-pz" value="Funghi"><span>Funghi</span></label><label class="chip small"><input type="checkbox" name="sorte-pz" value="Salami"><span>Salami</span></label><label class="chip small"><input type="checkbox" name="sorte-pz" value="Diavolo"><span>Diavolo</span></label><label class="chip small"><input type="checkbox" name="sorte-pz" value="Prosciutto-Funghi"><span>Prosciutto-Funghi</span></label><label class="chip small"><input type="checkbox" name="sorte-pz" value="Prosciutto"><span>Prosciutto</span></label></div></div>
+              </div>
+              <div class="stand-group">
+                <p class="stand-title">Stand 2 · neu ab Sommer 2027 <small>Crispy Cheese Potatoes <b>oder</b> Sloppy Joe Burger – eins von beiden</small></p>
+                <div class="chips"><label class="chip"><input type="checkbox" name="produkt" value="Crispy Cheese Potatoes" data-sorten="cp" data-stand="2" data-exklusiv="1"><span>Crispy Cheese Potatoes</span></label><label class="chip"><input type="checkbox" name="produkt" value="Sloppy Joe Burger" data-sorten="sj" data-stand="2" data-exklusiv="1"><span>Sloppy Joe Burger</span></label></div>
+                <div class="sorten" id="sorten-cp"><p>Sorten Crispy Cheese Potatoes</p><div class="chips"><label class="chip small"><input type="checkbox" name="sorte-cp" value="Classic"><span>Classic</span></label><label class="chip small"><input type="checkbox" name="sorte-cp" value="Cheesy Crunch"><span>Cheesy Crunch</span></label><label class="chip small"><input type="checkbox" name="sorte-cp" value="Green Vibe"><span>Green Vibe</span></label><label class="chip small"><input type="checkbox" name="sorte-cp" value="Hot ’n’ Cheese"><span>Hot ’n’ Cheese</span></label></div></div>
+              </div>
             </fieldset>
             <div class="field full"><label for="f-text">Art der Veranstaltung / Nachricht</label><textarea id="f-text" placeholder="z. B. Firmenfeier, Hochzeit, Festival, Stadtfest"></textarea></div>
           </div>
@@ -446,16 +486,27 @@
 
     // Anfrage per E-Mail
     const form = document.getElementById('anfrage-form');
-    form.querySelectorAll('input[name="produkt"]').forEach(p => p.addEventListener('change', () => {
+    const syncPanel = p => {
       const panel = document.getElementById('sorten-' + p.dataset.sorten);
       if (!panel) return;
       panel.classList.toggle('open', p.checked);
       if (!p.checked) panel.querySelectorAll('input').forEach(x => { x.checked = false; });
+    };
+    form.querySelectorAll('input[name="produkt"]').forEach(p => p.addEventListener('change', () => {
+      if (p.checked && p.dataset.exklusiv) {
+        form.querySelectorAll('input[data-exklusiv]').forEach(o => { if (o !== p && o.checked) { o.checked = false; syncPanel(o); } });
+      }
+      syncPanel(p);
     }));
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       const v = id => document.getElementById(id).value.trim();
-      const speisen = [...form.querySelectorAll('input[name="produkt"]:checked')].map(p => {
+      const gewaehlt = [...form.querySelectorAll('input[name="produkt"]:checked')];
+      const st = [];
+      if (gewaehlt.some(p => p.dataset.stand === '1')) st.push('Stand 1 Holzofen (Dinnele/Pizza)');
+      const s2 = gewaehlt.find(p => p.dataset.stand === '2');
+      if (s2) st.push('Stand 2 (' + s2.value + ')');
+      const speisen = gewaehlt.map(p => {
         const s = [...form.querySelectorAll('input[name="sorte-' + p.dataset.sorten + '"]:checked')].map(x => x.value);
         return '- ' + p.value + (s.length ? ': ' + s.join(', ') : '');
       });
@@ -470,6 +521,7 @@
         'Beginn Verkauf: ' + v('f-zeit'),
         'Telefon: ' + v('f-tel'),
         '',
+        'Stände: ' + (st.length ? st.join(' + ') : 'keine Angabe'),
         'Gewünschte Speisen:',
         speisen.length ? speisen.join('\n') : '- keine Angabe',
         '', v('f-text')
