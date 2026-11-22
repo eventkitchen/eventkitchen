@@ -331,10 +331,11 @@
         <form class="form-wrap" id="anfrage-form">
           <div class="form-grid">
             <div class="field"><label for="f-name">Name / Firma</label><input id="f-name" type="text" autocomplete="name"></div>
+            <div class="field"><label for="f-mail">E-Mail</label><input id="f-mail" type="email" autocomplete="email" required></div>
+            <div class="field"><label for="f-tel">Telefon (für Rückfragen)</label><input id="f-tel" type="tel" autocomplete="tel"></div>
             <div class="field"><label for="f-art">Privat oder gewerblich</label>
               <select id="f-art"><option value="">Bitte auswählen</option><option>Privat</option><option>Gewerblich</option></select></div>
-            <div class="field"><label for="f-tel">Telefon (für Rückfragen)</label><input id="f-tel" type="tel" autocomplete="tel"></div>
-            <div class="field"><label for="f-ort">Veranstaltungsort</label><input id="f-ort" type="text"></div>
+            <div class="field full"><label for="f-ort">Veranstaltungsort</label><input id="f-ort" type="text"></div>
             <div class="field"><label for="f-datum">Datum</label><input id="f-datum" type="text" placeholder="z. B. 14.06.2027"></div>
             <div class="field"><label for="f-zeit">Uhrzeit (Beginn Verkauf)</label><input id="f-zeit" type="text" placeholder="z. B. 18:00 Uhr"></div>
             <div class="field"><label for="f-personen">Personenanzahl</label><input id="f-personen" type="number" min="1" step="1" placeholder="berechnet ab 50 Personen"></div>
@@ -348,10 +349,6 @@
               <div class="sorten" id="sorten-ds"><p>Sorten Dinnele süß</p><div class="chips"><label class="chip small"><input type="checkbox" name="sorte-ds" value="Apfel-Zimt"><span>Apfel-Zimt</span></label><label class="chip small"><input type="checkbox" name="sorte-ds" value="Erdbeere-Schoko"><span>Erdbeere-Schoko</span></label></div></div>
               <div class="sorten" id="sorten-pz"><p>Sorten Pizza</p><div class="chips"><label class="chip small"><input type="checkbox" name="sorte-pz" value="Margherita"><span>Margherita</span></label><label class="chip small"><input type="checkbox" name="sorte-pz" value="Marinara (vegan)"><span>Marinara (vegan)</span></label><label class="chip small"><input type="checkbox" name="sorte-pz" value="Funghi"><span>Funghi</span></label><label class="chip small"><input type="checkbox" name="sorte-pz" value="Salami"><span>Salami</span></label><label class="chip small"><input type="checkbox" name="sorte-pz" value="Diavolo"><span>Diavolo</span></label><label class="chip small"><input type="checkbox" name="sorte-pz" value="Prosciutto-Funghi"><span>Prosciutto-Funghi</span></label><label class="chip small"><input type="checkbox" name="sorte-pz" value="Prosciutto"><span>Prosciutto</span></label></div></div>
               <div class="sorten" id="sorten-cp"><p>Sorten Crispy Cheese Potatoes</p><div class="chips"><label class="chip small"><input type="checkbox" name="sorte-cp" value="Classic"><span>Classic</span></label><label class="chip small"><input type="checkbox" name="sorte-cp" value="Cheesy Crunch"><span>Cheesy Crunch</span></label><label class="chip small"><input type="checkbox" name="sorte-cp" value="Green Vibe"><span>Green Vibe</span></label><label class="chip small"><input type="checkbox" name="sorte-cp" value="Hot ’n’ Cheese"><span>Hot ’n’ Cheese</span></label></div></div>
-            </fieldset>
-            <fieldset class="field full choice">
-              <legend>Abrechnung</legend>
-              <div class="chips"><label class="chip"><input type="radio" name="modell" value="Marken – 1 Portion pro Person"><span>Marken – 1 Portion pro Person</span></label><label class="chip"><input type="radio" name="modell" value="Marken – 2 Portionen pro Person"><span>Marken – 2 Portionen pro Person</span></label><label class="chip"><input type="radio" name="modell" value="Flatrate – unbegrenzt während der Verkaufszeit"><span>Flatrate – unbegrenzt</span></label><label class="chip"><input type="radio" name="modell" value="Noch unsicher – bitte beraten"><span>Noch unsicher – bitte beraten</span></label></div>
             </fieldset>
             <div class="field full"><label for="f-text">Art der Veranstaltung / Nachricht</label><textarea id="f-text" placeholder="z. B. Firmenfeier, Hochzeit, Festival, Stadtfest"></textarea></div>
           </div>
@@ -458,21 +455,19 @@
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       const v = id => document.getElementById(id).value.trim();
-      const m = form.querySelector('input[name="modell"]:checked');
-      const modell = m ? m.value : '';
       const speisen = [...form.querySelectorAll('input[name="produkt"]:checked')].map(p => {
         const s = [...form.querySelectorAll('input[name="sorte-' + p.dataset.sorten + '"]:checked')].map(x => x.value);
         return '- ' + p.value + (s.length ? ': ' + s.join(', ') : '');
       });
       const body = [
         'Name / Firma: ' + v('f-name'),
+        'E-Mail: ' + v('f-mail'),
         'Privat/Gewerblich: ' + v('f-art'),
         'Datum: ' + v('f-datum'),
         'Personenanzahl: ' + v('f-personen'),
         'Veranstaltungsort: ' + v('f-ort'),
         'Gewünschte Verkaufszeit: ' + v('f-dauer'),
         'Beginn Verkauf: ' + v('f-zeit'),
-        'Abrechnung: ' + modell,
         'Telefon: ' + v('f-tel'),
         '',
         'Gewünschte Speisen:',
