@@ -123,6 +123,24 @@
     .field textarea { min-height:110px; resize:vertical; }
     .field.full { grid-column:1 / -1; }
     .form-note { font-size:14px; color:var(--muted); margin-top:14px; }
+    fieldset.choice { border:0; padding:0; margin:0; min-width:0; }
+    fieldset.choice legend { display:block; padding:0; font-family:var(--display); font-weight:600; text-transform:uppercase; letter-spacing:.06em; font-size:15px; color:var(--ink); margin-bottom:6px; }
+    .hint { font-size:14px; color:var(--muted); margin:0 0 10px; }
+    .chips { display:flex; flex-wrap:wrap; gap:8px; }
+    .field label.chip { position:relative; display:inline-flex; margin:0; font-family:var(--body); font-weight:400; text-transform:none; letter-spacing:0; font-size:15px; }
+    .chip input { position:absolute; opacity:0; width:1px; height:1px; pointer-events:none; }
+    .chip span { display:inline-flex; align-items:center; gap:6px; padding:9px 15px; border:1px solid var(--line); border-radius:999px; background:#fcfbfa; color:var(--ink); line-height:1.25; cursor:pointer; user-select:none; transition:background .15s, border-color .15s, color .15s; }
+    .chip span em { font-style:normal; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.05em; background:var(--accent); color:#fff; padding:2px 6px; border-radius:3px; }
+    .chip span:hover { border-color:var(--accent); }
+    .chip input:checked + span { background:var(--accent); border-color:var(--accent); color:#fff; font-weight:600; }
+    .chip input:checked + span em { background:#fff; color:var(--accent-dark); }
+    .chip input:checked + span::before { content:"✓"; font-weight:700; }
+    .chip input:focus-visible + span { outline:2px solid var(--accent-dark); outline-offset:2px; }
+    .field label.chip.small { font-size:14px; }
+    .chip.small span { padding:6px 12px; }
+    .sorten { display:none; margin-top:12px; padding:12px 14px 14px; border-left:3px solid var(--accent); background:#faf6f1; border-radius:0 4px 4px 0; }
+    .sorten.open { display:block; }
+    .sorten > p { margin:0 0 8px; font-family:var(--display); font-weight:600; text-transform:uppercase; letter-spacing:.05em; font-size:14px; color:var(--ink); }
 
     /* Galerie */
     .gallery { display:grid; grid-template-columns:repeat(4, 1fr); gap:8px; margin-top:36px; }
@@ -315,16 +333,26 @@
             <div class="field"><label for="f-name">Name / Firma</label><input id="f-name" type="text" autocomplete="name"></div>
             <div class="field"><label for="f-art">Privat oder gewerblich</label>
               <select id="f-art"><option value="">Bitte auswählen</option><option>Privat</option><option>Gewerblich</option></select></div>
-            <div class="field"><label for="f-datum">Datum</label><input id="f-datum" type="text" placeholder="z. B. 14.06.2027"></div>
-            <div class="field"><label for="f-personen">Personenanzahl</label><input id="f-personen" type="number" min="1" step="1" placeholder="ungefähre Gästezahl (berechnet ab 50 Personen)"></div>
+            <div class="field"><label for="f-tel">Telefon (für Rückfragen)</label><input id="f-tel" type="tel" autocomplete="tel"></div>
             <div class="field"><label for="f-ort">Veranstaltungsort</label><input id="f-ort" type="text"></div>
-            <div class="field"><label for="f-speisen">Gewünschte Speisen</label><input id="f-speisen" type="text" placeholder="Dinnele, Pizza oder beides"></div>
+            <div class="field"><label for="f-datum">Datum</label><input id="f-datum" type="text" placeholder="z. B. 14.06.2027"></div>
+            <div class="field"><label for="f-zeit">Uhrzeit (Beginn Verkauf)</label><input id="f-zeit" type="text" placeholder="z. B. 18:00 Uhr"></div>
+            <div class="field"><label for="f-personen">Personenanzahl</label><input id="f-personen" type="number" min="1" step="1" placeholder="berechnet ab 50 Personen"></div>
             <div class="field"><label for="f-dauer">Gewünschte Verkaufszeit</label>
               <select id="f-dauer"><option value="">Bitte auswählen</option><option>3 Stunden (Standard)</option><option>3,5 Stunden</option><option>4 Stunden</option><option>4,5 Stunden</option><option>5 Stunden</option><option>5,5 Stunden</option><option>6 Stunden</option><option>Länger (bitte in der Nachricht angeben)</option></select></div>
-            <div class="field"><label for="f-modell">Abrechnung</label>
-              <select id="f-modell"><option value="">Bitte auswählen</option><option>Marken – 1 Portion pro Person</option><option>Marken – 2 Portionen pro Person</option><option>Flatrate – unbegrenzt während der Verkaufszeit</option><option>Noch unsicher – bitte beraten</option></select></div>
-            <div class="field"><label for="f-zeit">Uhrzeit (Beginn Verkauf)</label><input id="f-zeit" type="text" placeholder="z. B. 18:00 Uhr"></div>
-            <div class="field"><label for="f-tel">Telefon (für Rückfragen)</label><input id="f-tel" type="tel" autocomplete="tel"></div>
+            <fieldset class="field full choice">
+              <legend>Gewünschte Speisen</legend>
+              <p class="hint">Mehrfachauswahl möglich. Nach dem Anklicken eines Produkts können Sie die Sorten wählen.</p>
+              <div class="chips"><label class="chip"><input type="checkbox" name="produkt" value="Dinnele herzhaft" data-sorten="dh"><span>Dinnele herzhaft</span></label><label class="chip"><input type="checkbox" name="produkt" value="Dinnele süß" data-sorten="ds"><span>Dinnele süß</span></label><label class="chip"><input type="checkbox" name="produkt" value="Pizza" data-sorten="pz"><span>Pizza</span></label><label class="chip"><input type="checkbox" name="produkt" value="Crispy Cheese Potatoes" data-sorten="cp"><span>Crispy Cheese Potatoes<em>neu 2027</em></span></label><label class="chip"><input type="checkbox" name="produkt" value="Sloppy Joe Burger" data-sorten="sj"><span>Sloppy Joe Burger<em>neu 2027</em></span></label></div>
+              <div class="sorten" id="sorten-dh"><p>Sorten Dinnele herzhaft</p><div class="chips"><label class="chip small"><input type="checkbox" name="sorte-dh" value="Zwiebel-Speck"><span>Zwiebel-Speck</span></label><label class="chip small"><input type="checkbox" name="sorte-dh" value="Zwiebel-Käse"><span>Zwiebel-Käse</span></label><label class="chip small"><input type="checkbox" name="sorte-dh" value="Kartoffel-Speck"><span>Kartoffel-Speck</span></label><label class="chip small"><input type="checkbox" name="sorte-dh" value="Kartoffel-Käse"><span>Kartoffel-Käse</span></label><label class="chip small"><input type="checkbox" name="sorte-dh" value="Gemüse-Käse"><span>Gemüse-Käse</span></label><label class="chip small"><input type="checkbox" name="sorte-dh" value="Gemüse-Vegan"><span>Gemüse-Vegan</span></label></div></div>
+              <div class="sorten" id="sorten-ds"><p>Sorten Dinnele süß</p><div class="chips"><label class="chip small"><input type="checkbox" name="sorte-ds" value="Apfel-Zimt"><span>Apfel-Zimt</span></label><label class="chip small"><input type="checkbox" name="sorte-ds" value="Erdbeere-Schoko"><span>Erdbeere-Schoko</span></label></div></div>
+              <div class="sorten" id="sorten-pz"><p>Sorten Pizza</p><div class="chips"><label class="chip small"><input type="checkbox" name="sorte-pz" value="Margherita"><span>Margherita</span></label><label class="chip small"><input type="checkbox" name="sorte-pz" value="Marinara (vegan)"><span>Marinara (vegan)</span></label><label class="chip small"><input type="checkbox" name="sorte-pz" value="Funghi"><span>Funghi</span></label><label class="chip small"><input type="checkbox" name="sorte-pz" value="Salami"><span>Salami</span></label><label class="chip small"><input type="checkbox" name="sorte-pz" value="Diavolo"><span>Diavolo</span></label><label class="chip small"><input type="checkbox" name="sorte-pz" value="Prosciutto-Funghi"><span>Prosciutto-Funghi</span></label><label class="chip small"><input type="checkbox" name="sorte-pz" value="Prosciutto"><span>Prosciutto</span></label></div></div>
+              <div class="sorten" id="sorten-cp"><p>Sorten Crispy Cheese Potatoes</p><div class="chips"><label class="chip small"><input type="checkbox" name="sorte-cp" value="Classic"><span>Classic</span></label><label class="chip small"><input type="checkbox" name="sorte-cp" value="Cheesy Crunch"><span>Cheesy Crunch</span></label><label class="chip small"><input type="checkbox" name="sorte-cp" value="Green Vibe"><span>Green Vibe</span></label><label class="chip small"><input type="checkbox" name="sorte-cp" value="Hot ’n’ Cheese"><span>Hot ’n’ Cheese</span></label></div></div>
+            </fieldset>
+            <fieldset class="field full choice">
+              <legend>Abrechnung</legend>
+              <div class="chips"><label class="chip"><input type="radio" name="modell" value="Marken – 1 Portion pro Person"><span>Marken – 1 Portion pro Person</span></label><label class="chip"><input type="radio" name="modell" value="Marken – 2 Portionen pro Person"><span>Marken – 2 Portionen pro Person</span></label><label class="chip"><input type="radio" name="modell" value="Flatrate – unbegrenzt während der Verkaufszeit"><span>Flatrate – unbegrenzt</span></label><label class="chip"><input type="radio" name="modell" value="Noch unsicher – bitte beraten"><span>Noch unsicher – bitte beraten</span></label></div>
+            </fieldset>
             <div class="field full"><label for="f-text">Art der Veranstaltung / Nachricht</label><textarea id="f-text" placeholder="z. B. Firmenfeier, Hochzeit, Festival, Stadtfest"></textarea></div>
           </div>
           <div class="btn-row" style="justify-content:flex-start;"><button class="btn btn-accent" type="submit">Angebot anfragen</button></div>
@@ -420,20 +448,35 @@
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLb(); });
 
     // Anfrage per E-Mail
-    document.getElementById('anfrage-form').addEventListener('submit', (e) => {
+    const form = document.getElementById('anfrage-form');
+    form.querySelectorAll('input[name="produkt"]').forEach(p => p.addEventListener('change', () => {
+      const panel = document.getElementById('sorten-' + p.dataset.sorten);
+      if (!panel) return;
+      panel.classList.toggle('open', p.checked);
+      if (!p.checked) panel.querySelectorAll('input').forEach(x => { x.checked = false; });
+    }));
+    form.addEventListener('submit', (e) => {
       e.preventDefault();
       const v = id => document.getElementById(id).value.trim();
+      const m = form.querySelector('input[name="modell"]:checked');
+      const modell = m ? m.value : '';
+      const speisen = [...form.querySelectorAll('input[name="produkt"]:checked')].map(p => {
+        const s = [...form.querySelectorAll('input[name="sorte-' + p.dataset.sorten + '"]:checked')].map(x => x.value);
+        return '- ' + p.value + (s.length ? ': ' + s.join(', ') : '');
+      });
       const body = [
         'Name / Firma: ' + v('f-name'),
         'Privat/Gewerblich: ' + v('f-art'),
         'Datum: ' + v('f-datum'),
         'Personenanzahl: ' + v('f-personen'),
         'Veranstaltungsort: ' + v('f-ort'),
-        'Gewünschte Speisen: ' + v('f-speisen'),
         'Gewünschte Verkaufszeit: ' + v('f-dauer'),
         'Beginn Verkauf: ' + v('f-zeit'),
-        'Abrechnung: ' + v('f-modell'),
+        'Abrechnung: ' + modell,
         'Telefon: ' + v('f-tel'),
+        '',
+        'Gewünschte Speisen:',
+        speisen.length ? speisen.join('\n') : '- keine Angabe',
         '', v('f-text')
       ].join('\n');
       location.href = 'mailto:info@eventkitchen.net?subject=' + encodeURIComponent('Anfrage Event Kitchen') + '&body=' + encodeURIComponent(body);
