@@ -89,6 +89,18 @@
     .product.noimg { border-top:5px solid var(--accent); }
     .sweet { display:grid; grid-template-columns:repeat(2, 1fr); gap:26px; }
 
+    /* Neu 2027 */
+    .new-grid { display:grid; grid-template-columns:1.15fr .85fr; gap:26px; }
+    .new-card { background:var(--ink); color:#d9d5cf; border-radius:6px; padding:34px 34px 30px; position:relative; }
+    .new-card h3 { color:#fff; font-size:32px; margin-bottom:10px; }
+    .new-card p { margin:0 0 16px; }
+    .new-tag { position:absolute; top:-14px; left:30px; background:var(--accent); color:#fff; font-family:var(--display); font-weight:700; text-transform:uppercase; letter-spacing:.08em; font-size:14px; padding:5px 14px; border-radius:30px; }
+    .sorts { list-style:none; padding:0; margin:18px 0 0; display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    .sorts li { border:1px solid rgba(255,255,255,.18); border-radius:6px; padding:12px 14px; }
+    .sorts strong { display:block; font-family:var(--display); font-weight:700; text-transform:uppercase; letter-spacing:.04em; color:#fff; font-size:19px; }
+    .sorts span { font-size:15px; }
+    .new-note { font-size:15px; color:#b9b3ab; margin-top:16px; }
+
     /* Split */
     .split { display:grid; grid-template-columns:1fr 1fr; align-items:stretch; }
     .split-img { min-height:440px; background-size:cover; background-position:center; }
@@ -141,7 +153,7 @@
       .nav-links a { padding:12px 0; border-bottom:1px solid rgba(255,255,255,.1); font-size:19px; }
       .nav-inner { position:relative; }
       .products { grid-template-columns:repeat(2, 1fr); }
-      .split, .contact-grid { grid-template-columns:1fr; }
+      .split, .contact-grid, .new-grid { grid-template-columns:1fr; }
       .split-img { min-height:300px; }
       .split.reverse .split-img { order:-1; }
       .band { grid-template-columns:repeat(2, 1fr); }
@@ -151,7 +163,8 @@
     }
     @media (max-width: 620px) {
       section { padding:62px 0; }
-      .products, .sweet, .features, .form-grid { grid-template-columns:1fr; }
+      .products, .sweet, .features, .form-grid, .sorts { grid-template-columns:1fr; }
+      .new-card { padding:30px 22px 24px; }
       .gallery { grid-template-columns:repeat(2, 1fr); }
       .form-wrap { padding:24px; }
       .menu-head { flex-direction:column; gap:4px; }
@@ -217,7 +230,7 @@
         <div class="center">
           <svg class="icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><circle cx="32" cy="32" r="29"/><path d="M22 18v12a4 4 0 0 0 8 0V18M26 18v28M40 18c-4 3-5 9-4 14h4v14" stroke-linecap="round" stroke-linejoin="round"/></svg>
           <h2>Lecker, frisch, aus dem Holzofen –<br>unsere Speisen</h2>
-          <p class="intro">Dinnele sind die badische Spezialität vom Blech: dünner, knuspriger Hefeteig mit herzhaftem oder süßem Belag. Dazu backen wir klassische Pizza. Die Auswahl stimmen wir auf Ihr Event ab.</p>
+          <p class="intro">Dinnele sind die badische Spezialität vom Blech: dünner, knuspriger Hefeteig mit herzhaftem oder süßem Belag. Dazu backen wir klassische Pizza. Neu ab Sommer 2027: Crispy Cheese Potatoes und Sloppy Joe Burger. Die Auswahl stimmen wir auf Ihr Event ab.</p>
         </div>
 
         <div class="menu-head"><h3>Dinnele herzhaft</h3><span>Unsere Klassiker vom Blech</span></div>
@@ -246,6 +259,27 @@
           <article class="product"><img src="img/pizza-prosciutto-funghi.jpg" alt="Pizza Prosciutto-Funghi" loading="lazy"><div class="body"><h3>Prosciutto-Funghi</h3><p>Feine Champignons und herzhafter Schinken auf Tomatensauce mit zart schmelzendem Mozzarella.</p></div></article>
           <article class="product noimg"><div class="body"><h3>Prosciutto</h3><p>Saftiger, herzhafter Schinken auf aromatischer Tomatensauce, getoppt mit cremigem Mozzarella.</p></div></article>
         </div>
+
+        <div class="menu-head"><h3>Neu ab Sommer 2027</h3><span>Von unserem vierten Stand</span></div>
+        <div class="new-grid">
+          <article class="new-card">
+            <div class="new-tag">Neu</div>
+            <h3>Crispy Cheese Potatoes</h3>
+            <p>Knusprig gebackene Kartoffeln mit geschmolzenem Schweizer Raclettekäse – traditionelles Raclette mit modernem Streetfood-Charakter. Wir bereiten jede Portion frisch vor den Augen Ihrer Gäste zu. Dazu gibt es eine von drei cremigen Soßen.</p>
+            <ul class="sorts">
+              <li><strong>Classic</strong><span>mit Cornichons und Silberzwiebeln</span></li>
+              <li><strong>Cheesy Crunch</strong><span>mit knusprigem Bacon und Röstzwiebeln</span></li>
+              <li><strong>Green Vibe</strong><span>mit Oliven, roten Zwiebeln und Rucola</span></li>
+              <li><strong>Hot ’n’ Cheese</strong><span>mit Jalapeños und scharfer Chili-Note</span></li>
+            </ul>
+          </article>
+          <article class="new-card">
+            <div class="new-tag">Neu</div>
+            <h3>Sloppy Joe Burger</h3>
+            <p>Geröstetes Brioche-Brötchen mit würziger Rinderhackfleischsoße aus Tomaten und Zwiebeln, dazu Mayonnaise und knackiger Karottenslaw mit Frühlingszwiebeln.</p>
+            <p class="new-note">Unsere neuen Produkte gibt es an einem eigenen Stand – einzeln oder kombiniert mit unseren Dinnele- und Pizza-Ständen.</p>
+          </article>
+        </div>
       </div>
     </section>
 
@@ -255,6 +289,7 @@
       <div class="split-text">
         <h2>Für welche Events?<br>Für jedes!</h2>
         <p>Unser separater Holzofen sorgt auch auf großen Events wie Festivals oder Weihnachtsmärkten für einen reibungslosen Ablauf. Wir sind ein junges, motiviertes Team, das Besucher aktiv anspricht, für Atmosphäre sorgt und durch offene, frische Zubereitung echte Wirkung erzielt.</p>
+        <p>Mit vier Ständen bieten wir Veranstaltern auch mehrere Stände und kombinierte Sortimente an: Dinnele, Pizza, Crispy Cheese Potatoes und Sloppy Joe Burger. Nachhaltigkeit ist uns wichtig: Wir bevorzugen regionale Zutaten, bereiten alles frisch vor Ort zu und geben unsere Speisen in plastikfreien, kompostierbaren Verpackungen aus.</p>
         <ul class="tags">
           <li>Festivals</li><li>Weihnachtsmärkte</li><li>Stadtfeste</li><li>Streetfood-Märkte</li><li>Firmenfeiern</li><li>Private Feiern</li>
         </ul>
