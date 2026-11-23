@@ -137,6 +137,9 @@
     .field label { display:block; font-family:var(--display); font-weight:600; text-transform:uppercase; letter-spacing:.06em; font-size:15px; color:var(--ink); margin-bottom:6px; }
     .field input, .field select, .field textarea { width:100%; font:inherit; font-size:16px; padding:12px 14px; border:1px solid var(--line); border-radius:4px; background:#fcfbfa; color:var(--ink); }
     .field textarea { min-height:110px; resize:vertical; }
+    .field input[type="date"] { -webkit-appearance:none; appearance:none; display:block; min-height:50px; line-height:1.3; text-align:left; cursor:pointer; }
+    .field input[type="date"]::-webkit-date-and-time-value { text-align:left; }
+    .field input[type="date"]::-webkit-calendar-picker-indicator { cursor:pointer; opacity:.75; }
     .field.full { grid-column:1 / -1; }
     .form-note { font-size:14px; color:var(--muted); margin-top:14px; }
     .form-note a { color:var(--accent-dark); }
@@ -377,8 +380,9 @@
             <div class="field"><label for="f-art">Privat oder gewerblich</label>
               <select id="f-art" required><option value="">Bitte auswählen</option><option>Privat</option><option>Gewerblich</option></select></div>
             <div class="field full"><label for="f-ort">Veranstaltungsort</label><input id="f-ort" type="text" required placeholder="Ort bzw. Adresse"></div>
-            <div class="field"><label for="f-datum">Datum</label><input id="f-datum" type="text" required placeholder="z. B. 14.06.2027"></div>
-            <div class="field"><label for="f-zeit">Uhrzeit (Beginn Verkauf)</label><input id="f-zeit" type="text" required placeholder="z. B. 18:00 Uhr"></div>
+            <div class="field"><label for="f-datum">Datum</label><input id="f-datum" type="date" required></div>
+            <div class="field"><label for="f-zeit">Uhrzeit (Beginn Verkauf)</label>
+              <select id="f-zeit" required><option value="">Bitte auswählen</option><option value="07:00 Uhr">07:00 Uhr</option><option value="07:30 Uhr">07:30 Uhr</option><option value="08:00 Uhr">08:00 Uhr</option><option value="08:30 Uhr">08:30 Uhr</option><option value="09:00 Uhr">09:00 Uhr</option><option value="09:30 Uhr">09:30 Uhr</option><option value="10:00 Uhr">10:00 Uhr</option><option value="10:30 Uhr">10:30 Uhr</option><option value="11:00 Uhr">11:00 Uhr</option><option value="11:30 Uhr">11:30 Uhr</option><option value="12:00 Uhr">12:00 Uhr</option><option value="12:30 Uhr">12:30 Uhr</option><option value="13:00 Uhr">13:00 Uhr</option><option value="13:30 Uhr">13:30 Uhr</option><option value="14:00 Uhr">14:00 Uhr</option><option value="14:30 Uhr">14:30 Uhr</option><option value="15:00 Uhr">15:00 Uhr</option><option value="15:30 Uhr">15:30 Uhr</option><option value="16:00 Uhr">16:00 Uhr</option><option value="16:30 Uhr">16:30 Uhr</option><option value="17:00 Uhr">17:00 Uhr</option><option value="17:30 Uhr">17:30 Uhr</option><option value="18:00 Uhr">18:00 Uhr</option><option value="18:30 Uhr">18:30 Uhr</option><option value="19:00 Uhr">19:00 Uhr</option><option value="19:30 Uhr">19:30 Uhr</option><option value="20:00 Uhr">20:00 Uhr</option><option value="20:30 Uhr">20:30 Uhr</option><option value="21:00 Uhr">21:00 Uhr</option><option value="21:30 Uhr">21:30 Uhr</option><option value="22:00 Uhr">22:00 Uhr</option><option value="22:30 Uhr">22:30 Uhr</option><option value="23:00 Uhr">23:00 Uhr</option><option value="23:30 Uhr">23:30 Uhr</option></select></div>
             <div class="field"><label for="f-personen">Personenanzahl</label><input id="f-personen" type="number" min="1" step="1" required placeholder="berechnet ab 50 Personen"></div>
             <div class="field"><label for="f-dauer">Gewünschte Verkaufszeit</label>
               <select id="f-dauer" required><option value="">Bitte auswählen</option><option>3 Stunden (Standard)</option><option>3,5 Stunden</option><option>4 Stunden</option><option>4,5 Stunden</option><option>5 Stunden</option><option>5,5 Stunden</option><option>6 Stunden</option><option>Länger (bitte in der Nachricht angeben)</option></select></div>
@@ -508,6 +512,10 @@
       syncPanel(p);
       if (p.checked) errSpeisen.hidden = true;
     }));
+    const datumFeld = document.getElementById('f-datum');
+    const heute = new Date();
+    datumFeld.min = heute.getFullYear() + '-' + String(heute.getMonth() + 1).padStart(2, '0') + '-' + String(heute.getDate()).padStart(2, '0');
+    const deDatum = iso => { const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso); return m ? m[3] + '.' + m[2] + '.' + m[1] : iso; };
     const ENDPOINT = 'https://formsubmit.co/ajax/info@eventkitchen.net';
     const btn = document.getElementById('f-submit');
     const status = document.getElementById('f-status');
@@ -533,7 +541,7 @@
         'Telefon': v('f-tel') || '–',
         'Privat/Gewerblich': v('f-art'),
         'Veranstaltungsort': v('f-ort'),
-        'Datum': v('f-datum'),
+        'Datum': deDatum(v('f-datum')),
         'Beginn Verkauf': v('f-zeit'),
         'Personenanzahl': v('f-personen'),
         'Gewünschte Verkaufszeit': v('f-dauer'),
@@ -544,9 +552,12 @@
       const text = Object.entries(felder).map(([k, x]) => k + ': ' + x).join('\n');
       const mailto = 'mailto:info@eventkitchen.net?subject=' + encodeURIComponent('Anfrage Event Kitchen') + '&body=' + encodeURIComponent(text);
       btn.disabled = true; btn.textContent = 'Wird gesendet …'; status.hidden = true;
+      const ctl = new AbortController();
+      const timer = setTimeout(() => ctl.abort(), 20000);
       try {
         const r = await fetch(ENDPOINT, {
           method: 'POST',
+          signal: ctl.signal,
           headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
           body: JSON.stringify(Object.assign({
             _subject: 'Anfrage Event Kitchen – ' + v('f-name'),
@@ -559,9 +570,10 @@
         });
         const j = await r.json().catch(() => ({}));
         if (!r.ok || !(j.success === true || j.success === 'true')) throw new Error(j.message || String(r.status));
-        form.innerHTML = '<div class="form-success"><div class="check">✓</div><h3>Vielen Dank für Ihre Anfrage!</h3><p>Ihre Anfrage ist bei uns angekommen. Wir melden uns in Kürze mit einem Angebot bei Ihnen.</p></div>';
-        form.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        clearTimeout(timer);
+        location.href = 'danke.html';
       } catch (err) {
+        clearTimeout(timer);
         btn.disabled = false; btn.textContent = 'Angebot anfragen';
         status.innerHTML = 'Die Anfrage konnte gerade nicht gesendet werden. Bitte versuchen Sie es noch einmal oder <a href="' + mailto + '">senden Sie sie per E-Mail</a>.';
         status.hidden = false;

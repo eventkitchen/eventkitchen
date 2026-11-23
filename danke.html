@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anfrage gesendet – Event Kitchen</title>
+  <meta name="robots" content="noindex" />
+  <style>
+    @font-face { font-family:"Barlow Condensed"; src:url("fonts/BarlowCondensed-Bold.woff") format("woff"); font-weight:700; font-display:swap; }
+    @font-face { font-family:"Barlow"; src:url("fonts/Barlow-Regular.woff") format("woff"); font-weight:400; font-display:swap; }
+    @font-face { font-family:"Barlow"; src:url("fonts/Barlow-SemiBold.woff") format("woff"); font-weight:600; font-display:swap; }
+    html, body { height:100%; }
+    body { margin:0; display:flex; flex-direction:column; font-family:"Barlow", Arial, sans-serif; font-size:17px; line-height:1.65; color:#4a4744; background:#f6f3ef; }
+    .nav { background:#2b2a29; }
+    .wrap { max-width:860px; margin:0 auto; padding:0 22px; }
+    .nav .wrap { display:flex; align-items:center; justify-content:space-between; min-height:64px; }
+    .brand { font-family:"Barlow Condensed", Arial, sans-serif; font-weight:700; font-size:28px; letter-spacing:.04em; text-transform:uppercase; text-decoration:none; color:#fff; }
+    .brand span { color:#e07a1f; }
+    main { flex:1; display:flex; align-items:center; padding:56px 0; }
+    .card { background:#fff; border:1px solid #e3dfd9; border-top:4px solid #e07a1f; border-radius:6px; padding:44px 30px 40px; text-align:center; max-width:600px; margin:0 auto; }
+    .check { width:72px; height:72px; border-radius:50%; background:#e07a1f; color:#fff; display:flex; align-items:center; justify-content:center; margin:0 auto 20px; font-size:38px; font-weight:700; line-height:1; }
+    .kicker { font-family:"Barlow Condensed", Arial, sans-serif; font-weight:700; text-transform:uppercase; letter-spacing:.1em; color:#e07a1f; font-size:15px; margin:0 0 4px; }
+    h1 { font-family:"Barlow Condensed", Arial, sans-serif; font-weight:700; text-transform:uppercase; font-size:42px; line-height:1.05; color:#2b2a29; margin:0 0 16px; }
+    p { margin:0 0 14px; }
+    .small { font-size:15px; color:#7a756f; }
+    .small a { color:#b85f12; }
+    .btn { display:inline-block; margin-top:14px; padding:13px 26px; border-radius:4px; background:#e07a1f; color:#fff; text-decoration:none; font-family:"Barlow Condensed", Arial, sans-serif; font-weight:700; text-transform:uppercase; letter-spacing:.08em; font-size:17px; }
+    .btn:hover { background:#c96a14; }
+    footer { background:#1e1d1c; color:#9a948c; font-size:14px; padding:22px 0; }
+    footer a { color:#d9d5cf; margin-right:18px; text-decoration:none; }
+    @media (max-width:520px) { h1 { font-size:34px; } .card { padding:36px 20px 32px; } }
+  </style>
+</head>
+<body>
+  <header class="nav"><div class="wrap"><a class="brand" href="index.html">Event <span>Kitchen</span></a></div></header>
+  <main>
+    <div class="wrap">
+      <div class="card">
+        <div class="check" aria-hidden="true">✓</div>
+        <p class="kicker">Anfrage gesendet</p>
+        <h1>Vielen Dank für Ihre Anfrage!</h1>
+        <p>Ihre Anfrage ist bei uns angekommen. Wir prüfen Ihren Termin und melden uns in Kürze mit einem Angebot per E-Mail bei Ihnen.</p>
+        <p class="small">Bei Fragen erreichen Sie uns unter <a href="mailto:info@eventkitchen.net">info@eventkitchen.net</a>.</p>
+        <a class="btn" href="index.html">Zur Startseite</a>
+      </div>
+    </div>
+  </main>
+  <footer><div class="wrap"><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a> © 2026 Frank &amp; Lamerdin Event Kitchen GbR</div></footer>
+</body>
+</html>
