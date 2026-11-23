@@ -139,6 +139,14 @@
     .field textarea { min-height:110px; resize:vertical; }
     .field.full { grid-column:1 / -1; }
     .form-note { font-size:14px; color:var(--muted); margin-top:14px; }
+    .form-note a { color:var(--accent-dark); }
+    .form-error { margin:12px 0 0; padding:10px 14px; border-left:3px solid #c0392b; background:#fbeeee; color:#8e2a1f; font-size:15px; border-radius:0 4px 4px 0; }
+    .form-status { margin:14px 0 0; padding:12px 16px; border-radius:4px; font-size:15px; background:#fbeeee; color:#8e2a1f; border-left:3px solid #c0392b; }
+    .form-status a { color:inherit; font-weight:600; }
+    .form-success { text-align:center; padding:40px 24px; }
+    .form-success h3 { font-size:30px; margin:0 0 10px; }
+    .form-success p { margin:0 auto; max-width:520px; color:var(--muted); }
+    .form-success .check { width:64px; height:64px; border-radius:50%; background:var(--accent); color:#fff; display:flex; align-items:center; justify-content:center; margin:0 auto 18px; font-size:34px; font-weight:700; }
     fieldset.choice { border:0; padding:0; margin:0; min-width:0; }
     fieldset.choice legend { display:block; padding:0; font-family:var(--display); font-weight:600; text-transform:uppercase; letter-spacing:.06em; font-size:15px; color:var(--ink); margin-bottom:6px; }
     .hint { font-size:14px; color:var(--muted); margin:0 0 10px; }
@@ -276,12 +284,12 @@
           </div>
           <div class="stand-plus" aria-hidden="true">+</div>
           <div class="stand-card dark">
-            <div class="stand-kicker">Stand 2 · Neu ab Sommer 2027</div>
+            <div class="stand-kicker">Stand 2 &amp; 3 · Neu ab Sommer 2027</div>
             <h3>Crispy Cheese Potatoes <span class="or">oder</span> Sloppy Joe Burger</h3>
-            <p>Pro Event bieten wir an diesem Stand eine der beiden Spezialitäten an.</p>
+            <p>Jeder dieser Stände bietet eine der beiden Spezialitäten an – mit zwei Ständen gibt es auch beide auf einem Event.</p>
           </div>
         </div>
-        <p class="stands-note">Beide Stände sind einzeln buchbar oder zusammen auf einem Event.</p>
+        <p class="stands-note">Alle Stände sind einzeln buchbar oder zusammen auf einem Event.</p>
 
         <div class="menu-head"><h3>Dinnele herzhaft</h3><span>Unsere Klassiker vom Blech</span></div>
         <div class="products">
@@ -310,7 +318,7 @@
           <article class="product noimg"><div class="body"><h3>Prosciutto</h3><p>Saftiger, herzhafter Schinken auf aromatischer Tomatensauce, getoppt mit cremigem Mozzarella.</p></div></article>
         </div>
 
-        <div class="menu-head"><h3>Neu ab Sommer 2027</h3><span>Stand 2 – wahlweise eine der beiden Spezialitäten</span></div>
+        <div class="menu-head"><h3>Neu ab Sommer 2027</h3><span>Stand 2 und 3 – je Stand eine der beiden Spezialitäten</span></div>
         <div class="new-grid">
           <article class="new-card">
             <div class="new-tag">Neu</div>
@@ -328,7 +336,7 @@
             <div class="new-tag">Neu</div>
             <h3>Sloppy Joe Burger</h3>
             <p>Geröstetes Brioche-Brötchen mit würziger Rinderhackfleischsoße aus Tomaten und Zwiebeln, dazu Mayonnaise und knackiger Karottenslaw mit Frühlingszwiebeln.</p>
-            <p class="new-note">Crispy Cheese Potatoes oder Sloppy Joe Burger: An unserem zweiten Stand gibt es pro Event eine der beiden Spezialitäten – einzeln buchbar oder zusammen mit unserem Holzofen-Stand für Dinnele und Pizza.</p>
+            <p class="new-note">Crispy Cheese Potatoes oder Sloppy Joe Burger: An unseren Ständen 2 und 3 gibt es je Stand eine der beiden Spezialitäten – einzeln buchbar, zusammen oder kombiniert mit unserem Holzofen-Stand für Dinnele und Pizza.</p>
           </article>
         </div>
       </div>
@@ -361,22 +369,22 @@
         <svg class="icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><circle cx="32" cy="32" r="29"/><path d="M18 22h28v20H18zM18 22l14 11 14-11" stroke-linejoin="round"/></svg>
         <h2>Sie möchten uns<br>für Ihr Event buchen?</h2>
         <p class="intro">Wir freuen uns über Ihre Anfrage und erstellen Ihnen gerne ein individuelles Angebot. Je genauer Ihre Angaben, desto schneller können wir antworten. Die Anfrage ist unverbindlich.</p>
-        <form class="form-wrap" id="anfrage-form">
+        <form class="form-wrap" id="anfrage-form" style="position:relative">
           <div class="form-grid">
-            <div class="field"><label for="f-name">Name / Firma</label><input id="f-name" type="text" autocomplete="name"></div>
+            <div class="field"><label for="f-name">Name / Firma</label><input id="f-name" type="text" autocomplete="name" required></div>
             <div class="field"><label for="f-mail">E-Mail</label><input id="f-mail" type="email" autocomplete="email" required></div>
-            <div class="field"><label for="f-tel">Telefon (für Rückfragen)</label><input id="f-tel" type="tel" autocomplete="tel"></div>
+            <div class="field"><label for="f-tel">Telefon (optional)</label><input id="f-tel" type="tel" autocomplete="tel"></div>
             <div class="field"><label for="f-art">Privat oder gewerblich</label>
-              <select id="f-art"><option value="">Bitte auswählen</option><option>Privat</option><option>Gewerblich</option></select></div>
-            <div class="field full"><label for="f-ort">Veranstaltungsort</label><input id="f-ort" type="text"></div>
-            <div class="field"><label for="f-datum">Datum</label><input id="f-datum" type="text" placeholder="z. B. 14.06.2027"></div>
-            <div class="field"><label for="f-zeit">Uhrzeit (Beginn Verkauf)</label><input id="f-zeit" type="text" placeholder="z. B. 18:00 Uhr"></div>
-            <div class="field"><label for="f-personen">Personenanzahl</label><input id="f-personen" type="number" min="1" step="1" placeholder="berechnet ab 50 Personen"></div>
+              <select id="f-art" required><option value="">Bitte auswählen</option><option>Privat</option><option>Gewerblich</option></select></div>
+            <div class="field full"><label for="f-ort">Veranstaltungsort</label><input id="f-ort" type="text" required placeholder="Ort bzw. Adresse"></div>
+            <div class="field"><label for="f-datum">Datum</label><input id="f-datum" type="text" required placeholder="z. B. 14.06.2027"></div>
+            <div class="field"><label for="f-zeit">Uhrzeit (Beginn Verkauf)</label><input id="f-zeit" type="text" required placeholder="z. B. 18:00 Uhr"></div>
+            <div class="field"><label for="f-personen">Personenanzahl</label><input id="f-personen" type="number" min="1" step="1" required placeholder="berechnet ab 50 Personen"></div>
             <div class="field"><label for="f-dauer">Gewünschte Verkaufszeit</label>
-              <select id="f-dauer"><option value="">Bitte auswählen</option><option>3 Stunden (Standard)</option><option>3,5 Stunden</option><option>4 Stunden</option><option>4,5 Stunden</option><option>5 Stunden</option><option>5,5 Stunden</option><option>6 Stunden</option><option>Länger (bitte in der Nachricht angeben)</option></select></div>
+              <select id="f-dauer" required><option value="">Bitte auswählen</option><option>3 Stunden (Standard)</option><option>3,5 Stunden</option><option>4 Stunden</option><option>4,5 Stunden</option><option>5 Stunden</option><option>5,5 Stunden</option><option>6 Stunden</option><option>Länger (bitte in der Nachricht angeben)</option></select></div>
             <fieldset class="field full choice">
-              <legend>Gewünschte Speisen</legend>
-              <p class="hint">Nach dem Anklicken eines Produkts können Sie die Sorten wählen. Beide Stände lassen sich kombinieren.</p>
+              <legend>Gewünschte Speisen (mind. 1 Produkt)</legend>
+              <p class="hint">Nach dem Anklicken eines Produkts können Sie die Sorten wählen. Die Stände lassen sich kombinieren.</p>
               <div class="stand-group">
                 <p class="stand-title">Stand 1 · Holzofen <small>Dinnele und Pizza – auch beides zusammen</small></p>
                 <div class="chips"><label class="chip"><input type="checkbox" name="produkt" value="Dinnele herzhaft" data-sorten="dh" data-stand="1"><span>Dinnele herzhaft</span></label><label class="chip"><input type="checkbox" name="produkt" value="Dinnele süß" data-sorten="ds" data-stand="1"><span>Dinnele süß</span></label><label class="chip"><input type="checkbox" name="produkt" value="Pizza" data-sorten="pz" data-stand="1"><span>Pizza</span></label></div>
@@ -385,15 +393,18 @@
                 <div class="sorten" id="sorten-pz"><p>Sorten Pizza</p><div class="chips"><label class="chip small"><input type="checkbox" name="sorte-pz" value="Margherita"><span>Margherita</span></label><label class="chip small"><input type="checkbox" name="sorte-pz" value="Marinara (vegan)"><span>Marinara (vegan)</span></label><label class="chip small"><input type="checkbox" name="sorte-pz" value="Funghi"><span>Funghi</span></label><label class="chip small"><input type="checkbox" name="sorte-pz" value="Salami"><span>Salami</span></label><label class="chip small"><input type="checkbox" name="sorte-pz" value="Diavolo"><span>Diavolo</span></label><label class="chip small"><input type="checkbox" name="sorte-pz" value="Prosciutto-Funghi"><span>Prosciutto-Funghi</span></label><label class="chip small"><input type="checkbox" name="sorte-pz" value="Prosciutto"><span>Prosciutto</span></label></div></div>
               </div>
               <div class="stand-group">
-                <p class="stand-title">Stand 2 · neu ab Sommer 2027 <small>Crispy Cheese Potatoes <b>oder</b> Sloppy Joe Burger – eins von beiden</small></p>
-                <div class="chips"><label class="chip"><input type="checkbox" name="produkt" value="Crispy Cheese Potatoes" data-sorten="cp" data-stand="2" data-exklusiv="1"><span>Crispy Cheese Potatoes</span></label><label class="chip"><input type="checkbox" name="produkt" value="Sloppy Joe Burger" data-sorten="sj" data-stand="2" data-exklusiv="1"><span>Sloppy Joe Burger</span></label></div>
+                <p class="stand-title">Stand 2 und 3 · neu ab Sommer 2027 <small>Je Stand Crispy Cheese Potatoes <b>oder</b> Sloppy Joe Burger – mit beiden Ständen auch beides</small></p>
+                <div class="chips"><label class="chip"><input type="checkbox" name="produkt" value="Crispy Cheese Potatoes" data-sorten="cp" data-stand="2"><span>Crispy Cheese Potatoes</span></label><label class="chip"><input type="checkbox" name="produkt" value="Sloppy Joe Burger" data-sorten="sj" data-stand="2"><span>Sloppy Joe Burger</span></label></div>
                 <div class="sorten" id="sorten-cp"><p>Sorten Crispy Cheese Potatoes</p><div class="chips"><label class="chip small"><input type="checkbox" name="sorte-cp" value="Classic"><span>Classic</span></label><label class="chip small"><input type="checkbox" name="sorte-cp" value="Cheesy Crunch"><span>Cheesy Crunch</span></label><label class="chip small"><input type="checkbox" name="sorte-cp" value="Green Vibe"><span>Green Vibe</span></label><label class="chip small"><input type="checkbox" name="sorte-cp" value="Hot ’n’ Cheese"><span>Hot ’n’ Cheese</span></label></div></div>
               </div>
+              <p class="form-error" id="err-speisen" hidden>Bitte wählen Sie mindestens ein Produkt aus.</p>
             </fieldset>
-            <div class="field full"><label for="f-text">Art der Veranstaltung / Nachricht</label><textarea id="f-text" placeholder="z. B. Firmenfeier, Hochzeit, Festival, Stadtfest"></textarea></div>
+            <div class="field full"><label for="f-text">Art der Veranstaltung / Nachricht</label><textarea id="f-text" required placeholder="z. B. Firmenfeier, Hochzeit, Festival, Stadtfest"></textarea></div>
           </div>
-          <div class="btn-row" style="justify-content:flex-start;"><button class="btn btn-accent" type="submit">Angebot anfragen</button></div>
-          <p class="form-note">Beim Absenden öffnet sich Ihr E-Mail-Programm mit einer vorausgefüllten Nachricht an info@eventkitchen.net.</p>
+          <input type="text" name="_honey" id="f-honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
+          <div class="btn-row" style="justify-content:flex-start;"><button class="btn btn-accent" type="submit" id="f-submit">Angebot anfragen</button></div>
+          <p class="form-status" id="f-status" role="status" hidden></p>
+          <p class="form-note">Alle Felder außer Telefon sind Pflichtfelder. Ihre Anfrage wird direkt an uns gesendet. Hinweise zur Verarbeitung Ihrer Daten finden Sie in der <a href="datenschutz.html">Datenschutzerklärung</a>.</p>
         </form>
       </div>
     </section>
@@ -492,41 +503,69 @@
       panel.classList.toggle('open', p.checked);
       if (!p.checked) panel.querySelectorAll('input').forEach(x => { x.checked = false; });
     };
+    const errSpeisen = document.getElementById('err-speisen');
     form.querySelectorAll('input[name="produkt"]').forEach(p => p.addEventListener('change', () => {
-      if (p.checked && p.dataset.exklusiv) {
-        form.querySelectorAll('input[data-exklusiv]').forEach(o => { if (o !== p && o.checked) { o.checked = false; syncPanel(o); } });
-      }
       syncPanel(p);
+      if (p.checked) errSpeisen.hidden = true;
     }));
-    form.addEventListener('submit', (e) => {
+    const ENDPOINT = 'https://formsubmit.co/ajax/info@eventkitchen.net';
+    const btn = document.getElementById('f-submit');
+    const status = document.getElementById('f-status');
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const v = id => document.getElementById(id).value.trim();
       const gewaehlt = [...form.querySelectorAll('input[name="produkt"]:checked')];
+      if (!gewaehlt.length) {
+        errSpeisen.hidden = false;
+        errSpeisen.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
+      }
       const st = [];
       if (gewaehlt.some(p => p.dataset.stand === '1')) st.push('Stand 1 Holzofen (Dinnele/Pizza)');
-      const s2 = gewaehlt.find(p => p.dataset.stand === '2');
-      if (s2) st.push('Stand 2 (' + s2.value + ')');
+      gewaehlt.filter(p => p.dataset.stand === '2').forEach((p, i) => st.push('Stand ' + (2 + i) + ' (' + p.value + ')'));
       const speisen = gewaehlt.map(p => {
         const s = [...form.querySelectorAll('input[name="sorte-' + p.dataset.sorten + '"]:checked')].map(x => x.value);
-        return '- ' + p.value + (s.length ? ': ' + s.join(', ') : '');
+        return p.value + (s.length ? ': ' + s.join(', ') : '');
       });
-      const body = [
-        'Name / Firma: ' + v('f-name'),
-        'E-Mail: ' + v('f-mail'),
-        'Privat/Gewerblich: ' + v('f-art'),
-        'Datum: ' + v('f-datum'),
-        'Personenanzahl: ' + v('f-personen'),
-        'Veranstaltungsort: ' + v('f-ort'),
-        'Gewünschte Verkaufszeit: ' + v('f-dauer'),
-        'Beginn Verkauf: ' + v('f-zeit'),
-        'Telefon: ' + v('f-tel'),
-        '',
-        'Stände: ' + (st.length ? st.join(' + ') : 'keine Angabe'),
-        'Gewünschte Speisen:',
-        speisen.length ? speisen.join('\n') : '- keine Angabe',
-        '', v('f-text')
-      ].join('\n');
-      location.href = 'mailto:info@eventkitchen.net?subject=' + encodeURIComponent('Anfrage Event Kitchen') + '&body=' + encodeURIComponent(body);
+      const felder = {
+        'Name / Firma': v('f-name'),
+        'E-Mail': v('f-mail'),
+        'Telefon': v('f-tel') || '–',
+        'Privat/Gewerblich': v('f-art'),
+        'Veranstaltungsort': v('f-ort'),
+        'Datum': v('f-datum'),
+        'Beginn Verkauf': v('f-zeit'),
+        'Personenanzahl': v('f-personen'),
+        'Gewünschte Verkaufszeit': v('f-dauer'),
+        'Stände': st.join(' + '),
+        'Gewünschte Speisen': speisen.join(' | '),
+        'Nachricht': v('f-text')
+      };
+      const text = Object.entries(felder).map(([k, x]) => k + ': ' + x).join('\n');
+      const mailto = 'mailto:info@eventkitchen.net?subject=' + encodeURIComponent('Anfrage Event Kitchen') + '&body=' + encodeURIComponent(text);
+      btn.disabled = true; btn.textContent = 'Wird gesendet …'; status.hidden = true;
+      try {
+        const r = await fetch(ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify(Object.assign({
+            _subject: 'Anfrage Event Kitchen – ' + v('f-name'),
+            _template: 'table',
+            _captcha: 'false',
+            _honey: document.getElementById('f-honey').value,
+            _replyto: v('f-mail'),
+            email: v('f-mail')
+          }, felder))
+        });
+        const j = await r.json().catch(() => ({}));
+        if (!r.ok || !(j.success === true || j.success === 'true')) throw new Error(j.message || String(r.status));
+        form.innerHTML = '<div class="form-success"><div class="check">✓</div><h3>Vielen Dank für Ihre Anfrage!</h3><p>Ihre Anfrage ist bei uns angekommen. Wir melden uns in Kürze mit einem Angebot bei Ihnen.</p></div>';
+        form.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } catch (err) {
+        btn.disabled = false; btn.textContent = 'Angebot anfragen';
+        status.innerHTML = 'Die Anfrage konnte gerade nicht gesendet werden. Bitte versuchen Sie es noch einmal oder <a href="' + mailto + '">senden Sie sie per E-Mail</a>.';
+        status.hidden = false;
+      }
     });
   </script>
 </body>
